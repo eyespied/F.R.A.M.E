@@ -1,0 +1,81 @@
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 350;
+    color:#A7A1AE;
+    background-color:#1F2739;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 300;
+    text-align: center;
+    color: #4DC3FA;
+}
+
+h2 {
+    font-size:1em;
+    font-weight: 350;
+    text-align: center;
+    padding-bottom: 1em;
+    color: #FB667A;
+    display: block;
+}
+
+.blue {
+    color: #185875;
+}
+
+.yellow {
+    color: #FFF842;
+}
+
+.container {
+	  text-align: left;
+	  overflow: hidden;
+	  width: 75%;
+	  margin: 0 auto;
+    display: table;
+    padding: 0 0 8em 0;
+}
+
+.container th h1 {
+	  font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    color: #185875;
+}
+
+.container td {
+	  font-weight: normal;
+	  font-size: 1em;
+    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	  -moz-box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container td, .container th {
+	  padding-bottom: 1%;
+	  padding-top: 1%;
+    padding-left:1%;
+}
+
+.container a{
+    color: #4DC3FA;
+}
+
+.container tr{
+	  background-color: #323C50;
+}
+
+.container td:first-child {
+    color: #FB667A;
+}
+
+.container td:hover {
+    background-color: #FFF842;
+    color: #403E10;
+    font-weight: bold;
+    transition-duration: 0.4s;
+}
