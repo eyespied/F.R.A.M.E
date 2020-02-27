@@ -1,3 +1,2 @@
 # frame_project
-Facial Recognition Attendance Monitoring Engine.\
-Final Group Project for our Computer Science Undergraduate Degree.
+![F.R.A.M.E Overview](https://github.com/eyespied/F.R.A.M.E/blob/master/design/F.R.A.M.E_FINAL.pdf)
