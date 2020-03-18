@@ -1,8 +1,8 @@
 import tkinter as tk
 import threading
 import cv2
+import face_recognition
 from PIL import Image, ImageTk
-from faceDetect import faceDetect
 import datetime
 import os
 
@@ -42,10 +42,47 @@ import os
 #         FrameGUI.button2.config(image=photo)
 #         FrameGUI.button2.image = photo  # avoid garbage collection
 
+class BreakIt(Exception): pass
+
+
+def computeImage(filename):
+    print("[INFO] CROSS-REFERENCING IMAGE")
+    print(filename)
+    # Recognizing Face from photo Saved
+    var = 0
+
+    directory = "output/"
+    file_names = os.listdir(directory)
+
+    picture_of_me = face_recognition.load_image_file("rawimages/{}".format(filename))
+    my_face_encoding = face_recognition.face_encodings(picture_of_me)[0]
+
+    print("[INFO] CHECKING IF USER IS IN DATABASE")
+    try:
+        for i in file_names:
+            iPath = os.path.join(directory, i)
+            with open(iPath, 'rb') as fh:
+
+                new_picture = face_recognition.load_image_file(iPath)
+
+                for face_encoding in face_recognition.face_encodings(new_picture):
+
+                    results = face_recognition.compare_faces([my_face_encoding], face_encoding)
+
+                    if results[0]:
+                        print("[INFO] USER FOUND")
+                        userID = ''.join(filter(lambda x: x.isdigit(), iPath))
+                        print("[INFO] ID : {}".format(userID))
+                        raise BreakIt
+                    else:
+                        pass
+    except BreakIt:
+        pass
+
 
 class FrameGUI:
     def __init__(self, vs):
-        self.outputPath = 'output'
+        self.outputPath = 'rawimages'
         self.vs = vs
         self.frame = None
         self.thread = None
@@ -137,7 +174,7 @@ class FrameGUI:
                     self.panel.image = image
 
         except RuntimeError as e:
-            print("[MSG] RUNTIME ERROR CATCH")
+            print("[INFO] RUNTIME ERROR CATCH")
 
     def takeImage(self):
         timestamp = datetime.datetime.now()
@@ -145,11 +182,11 @@ class FrameGUI:
         p = os.path.sep.join((self.outputPath, filename))
         # Save file
         cv2.imwrite(p, self.frame.copy())
-        print("[MSG] PHOTO SAVED TO OUTPUT DIR at", timestamp)
-        faceDetect.PrintTest()
+        print("[INFO] PHOTO SAVED TO OUTPUT DIR at", timestamp)
+        computeImage(filename)
 
     def onClose(self):
-        print("[MSG] APPLICATION CLOSING")
+        print("[INFO] APPLICATION CLOSING")
         self.stopEvent.set()
         self.vs.stop()
         self.root.quit()
