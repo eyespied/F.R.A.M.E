@@ -11,6 +11,13 @@ from imutils.video import VideoStream
 import time
 import threading
 
+ifClass = False
+
+
+def classCheck():
+    class_check = threading.Thread(target=systemtimer.classCheck)
+    class_check.start()
+
 
 # Start Web cam Video Stream
 # src=0 - USB Web cam
@@ -21,13 +28,8 @@ time.sleep(2.0)
 app = FrameGUI(vs)
 print("[INFO] APPLICATION LOADED")
 
-# Starts thread for the late timer
-set_thread = threading.Thread(target=gui.lateTimer)
-set_thread.start()
-
-# Starts thread for the system timer
-system_thread = threading.Thread(target=systemtimer.systemTimer)
-system_thread.start()
+if not ifClass:
+    classCheck()
 
 # Launches GUI Application
 app.root.mainloop()

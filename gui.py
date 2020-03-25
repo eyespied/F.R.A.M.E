@@ -12,6 +12,7 @@ from PIL import Image, ImageTk
 import datetime
 import os
 import sqlForGui
+import systemtimer
 import time
 
 
@@ -23,16 +24,13 @@ class BreakIt(Exception): pass
 attendees = []
 # Stores late attended UserID's in a list
 late_attendees = []
+yes = False
 
 
-# lateTimer that activates when late_timer reaches 0
-
-def lateTimer():
+# lateTimer that activates when late_timer reaches
+def lateTimer(late_timer):
     global isLate
-    global late_timer
-
     # Late timer variable (seconds) change this to change the timer.
-    late_timer = 10
     while late_timer > 0:
         isLate = False
         time.sleep(1)
@@ -53,6 +51,24 @@ def addUserToAttendList(userid):
         print("[INFO] ADDED USER TO LATE-ATTENDANCE LIST")
 
 
+def updateGUIClassDetails():
+    print("[GUI] CLASS DETAILS PRINTED TO WINDOW")
+    classDetails = [str(sqlForGui.module_code), sqlForGui.classDate, sqlForGui.classDescription,
+                    sqlForGui.classLecturer,
+                    sqlForGui.classLength]
+
+    classLength = (sqlForGui.classLength / 60)
+
+    classDetailsText = str(sqlForGui.classDate) + "\n\n" + str(sqlForGui.module_code) + "\n\n" + str(
+        sqlForGui.classDescription) + "\n" \
+                       + str(classLength) + " Hour(s)" + "\n\n" + str(sqlForGui.classLecturer)
+
+    print(classDetails)
+    classDetails = tk.Label(FrameGUI.root, text=classDetailsText, font=30)
+    classDetails.place(relx=0.77, rely=0.15, relwidth=0.2, relheight=0.3)
+    classDetails.after((sqlForGui.classLength * 1000), lambda: classDetails.place_forget())
+
+
 # Updates GUI with a tick if user is found in the system
 # @param userid - The User's ID
 # @param timestamp - Filename of photo without the extension
@@ -61,12 +77,21 @@ def updateGUIYes(userid, timestamp):
     # Calls DB to pull the userID, First Name and Last Name
     sqlForGui.readUserData(userid)
 
-    tick = tk.PhotoImage(file="images/tick.png")
-    found = tk.Label(FrameGUI.root, compound=tk.CENTER, image=tick, bg='#05345C')
-    found.image = tick
-    found.place(relx=0.249, rely=0.15, relwidth=0.5, relheight=0.4)
-    # Removes GUI tick after 3 seconds
-    found.after(3000, lambda: found.place_forget())
+    if not isLate:
+        tick = tk.PhotoImage(file="images/tick.png")
+        found = tk.Label(FrameGUI.root, compound=tk.CENTER, image=tick, bg='#05345C')
+        found.image = tick
+        found.place(relx=0.249, rely=0.15, relwidth=0.5, relheight=0.4)
+        # Removes GUI tick after 3 seconds
+        found.after(3000, lambda: found.place_forget())
+
+    if isLate:
+        tick = tk.PhotoImage(file="images/late.png")
+        found = tk.Label(FrameGUI.root, compound=tk.CENTER, image=tick, bg='#05345C')
+        found.image = tick
+        found.place(relx=0.249, rely=0.15, relwidth=0.5, relheight=0.4)
+        # Removes GUI tick after 3 seconds
+        found.after(3000, lambda: found.place_forget())
 
     # Prints out the User's Information
     userInformation = """{}\n{} {}""".format(sqlForGui.user, sqlForGui.fname, sqlForGui.lname)
@@ -146,7 +171,6 @@ def computeImage(filename):
 
 
 # Class that deals with the GUI
-
 class FrameGUI:
     root = None
 
@@ -221,9 +245,9 @@ class FrameGUI:
         self.button2.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         self.stopEvent = threading.Event()
+
         self.thread = threading.Thread(target=self.videoLoop, args=())
         self.thread.start()
-
         self.root.wm_protocol("WM_DELETE_WINDOW", self.onClose)
 
     # Creates a video loop frame in the center of the GUI

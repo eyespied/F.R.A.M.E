@@ -4,20 +4,19 @@ __credits__ = ["James Clark", "Hugo A'Violet", "Sam Tredgett"]
 __version__ = "1.0"
 
 # Import in necessary libraries
+import threading
 import time
 import sqlForGui
 import gui
+from datetime import datetime, date
 
 
 # Function that runs the system timer
 # When the system timer is 0, updates the SQL database with late and attended SQL queries
 
-def systemTimer():
+def systemTimer(system_timer):
     global timerOver
-    global system_timer
-
     # Variable that defines the time the system variable takes to finish
-    system_timer = 20
     while system_timer > 0:
         timerOver = False
         time.sleep(1)
@@ -33,3 +32,42 @@ def systemTimer():
 
         for i in gui.late_attendees:
             sqlForGui.updateClassTableLate(i)
+
+    sqlForGui.exportAttendanceList(sqlForGui.module_code, sqlForGui.db_name)
+
+
+def getCurrentTimeAndDate():
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    today = date.today()
+
+    current_time_and_date = str(today) + " " + current_time
+    print(current_time_and_date)
+    sqlForGui.getClassDate(current_time_and_date)
+
+
+def classCheck():
+    timer = 0
+    global classCheckOver
+
+    # Variable that defines the time the system variable takes to finish
+    while timer > 0:
+        classCheckOver = False
+        time.sleep(1)
+        timer -= 1
+
+    classCheckOver = True
+    if classCheckOver:
+        print("[SQL] CHECKING IF CLASS FOUND")
+        getCurrentTimeAndDate()
+        classCheck()
+
+
+def startSystemTimer(class_length):
+    # Starts thread for class timer
+    late_thread = threading.Thread(target=gui.lateTimer(30))
+    system_thread = threading.Thread(target=systemTimer(class_length - 11))
+
+    late_thread.start()
+    system_thread.start()
+
