@@ -43,7 +43,7 @@ def getCurrentTimeAndDate():
 
     current_time_and_date = str(today) + " " + current_time
     print(current_time_and_date)
-    sqlForGui.getClassDate(current_time_and_date)
+    sqlForGui.getClassDate(current_time_and_date, gui.finalRoomNumber)
 
 
 def classCheck():

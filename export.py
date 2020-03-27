@@ -1,3 +1,5 @@
+from reportlab.lib.units import inch
+
 import sqlForGui
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.lib.pagesizes import letter
@@ -11,11 +13,21 @@ from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+logo = 'images/uok_logo.jpg'
+Width, Height = letter
+Title = "Attendance List"
+
+
+# Define the fixed features of the first page of the document
+def myFirstPage(canvas, pdf):
+    canvas.saveState()
+
+    canvas.drawImage(logo, 0, 710, width=100, height=100, preserveAspectRatio=True)
+
 
 def exportToPDF(export_list, export_module_code, export_filename):
     data = export_list
     filename = ("PDF/" + export_module_code + "/" + export_filename + ".pdf")
-
     pdf = SimpleDocTemplate(
         filename,
         pagesize=letter
@@ -46,7 +58,7 @@ def exportToPDF(export_list, export_module_code, export_filename):
     table.setStyle(ts)
 
     elems = [table]
-    pdf.build(elems)
+    pdf.build(elems, onFirstPage=myFirstPage)
     sendEmailToLecturer(filename)
 
 

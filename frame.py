@@ -3,9 +3,15 @@ __copyright__ = "Copyright 2020, F.R.A.M.E Project"
 __credits__ = ["James Clark", "Hugo A'Violet", "Sam Tredgett"]
 __version__ = "1.0"
 
+# TODO:
+#   - Check threading, end a thread if not needed.
+#   - Export out of one-drive check speeds
+#   - Clean up code / redundant code
+#   - Comment all code so its up to date
+#   - custom video filter?
+
 # Import in necessary libraries
 from gui import FrameGUI
-import gui
 import systemtimer
 from imutils.video import VideoStream
 import time
@@ -24,6 +30,7 @@ def classCheck():
 # src=1 - Laptop In-built Web cam
 print("[INFO] APPLICATION STARTING")
 vs = VideoStream(src=0).start()
+
 time.sleep(2.0)
 app = FrameGUI(vs)
 print("[INFO] APPLICATION LOADED")

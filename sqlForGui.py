@@ -25,6 +25,12 @@ classLength = ''
 classLecturer = ''
 lecturerEmail = ''
 
+# TODO:
+#       - Save class data from the class and copy it to a new table in a new database.
+#       - Clear class data from the class table
+#       - Update class data when new class is found
+#       - Repeat process
+
 
 def exportAttendanceList(module_code_, database_name):
     global db_name
@@ -123,7 +129,7 @@ def createAttendanceList(module_code, current_time_and_date):
             cursor.close()
 
 
-def getClassDate(current_time_and_date):
+def getClassDate(current_time_and_date, room_number):
     time = 0
     try:
         connection = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
@@ -132,9 +138,9 @@ def getClassDate(current_time_and_date):
                                              password='frame2020',
                                              )
 
-        sql_update_Query = """ SELECT * FROM Room_One WHERE classDate = (%s) """
+        sql_update_Query = """ SELECT * FROM `%s` WHERE classDate = (%s) """
         cursor = connection.cursor()
-        cursor.execute(sql_update_Query, (current_time_and_date,))
+        cursor.execute(sql_update_Query, (room_number, current_time_and_date,))
         records = cursor.fetchall()
 
         global module_code
