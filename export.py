@@ -63,7 +63,7 @@ def exportToPDF(export_list, export_module_code, export_filename):
 
 
 def sendEmailToLecturer(pdf):
-    subject = str(sqlForGui.db_name)
+    subject = str(sqlForGui.db_name_2)
     body = "Automated email, send with attached attendance form - F.R.A.M.E"
     sender_email = "frame.project600@gmail.com"
     receiver_email = str(sqlForGui.lecturerEmail)
@@ -79,6 +79,7 @@ def sendEmailToLecturer(pdf):
     message.attach(MIMEText(body, "plain"))
 
     filename = pdf
+    title = filename[10:]
 
     # Open PDF file in binary mode
     with open(filename, "rb") as attachment:
@@ -93,7 +94,7 @@ def sendEmailToLecturer(pdf):
     # Add header as key/value pair to attachment part
     part.add_header(
         "Content-Disposition",
-        f"attachment; filename= {filename}",
+        f"attachment; filename= {title}",
     )
 
     # Add attachment to message and convert message to string

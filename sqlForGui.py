@@ -30,26 +30,24 @@ classLecturer = ''
 lecturerEmail = ''
 
 
-def exportAttendanceList(module_code_, database_name):
-    global db_name
-    db_name = database_name
-    replace = db_name.replace(':', '-')
+def exportAttendanceList():
+    global db_name_2
+    replace = db_name_2.replace(':', '-')
     export_file_name = str(replace)
-    export_module_name = str(module_code_)
+    export_module_name = str(module_code)
 
     try:
         connection_populate = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
-                                                      database='frame_database',
                                                       user='admin',
                                                       password='frame2020',
                                                       )
 
-        sql_insert_Query = """SELECT * FROM `%s` ORDER BY classID ASC"""
+        sql_insert_Query = """SELECT * FROM `%s`.`%s` ORDER BY classID ASC"""
 
         cursor = connection_populate.cursor()
-        cursor.execute(sql_insert_Query, (db_name,))
+        cursor.execute(sql_insert_Query, (module_code, db_name_2,))
         records = cursor.fetchall()
-        print("[SQL] EXPORTED {} ATTENDANCE LIST WITH STUDENTS".format(db_name))
+        print("[SQL] EXPORTED {} ATTENDANCE LIST WITH STUDENTS".format(db_name_2))
 
         for row in records:
             classid = (row[0])
@@ -63,9 +61,6 @@ def exportAttendanceList(module_code_, database_name):
 
         print(export_list)
         export.exportToPDF(export_list, export_module_name, export_file_name)
-        now = datetime.now()
-        str_now = str(now)
-        createAttendanceList(export_module_name, str_now)
 
 
     except Error as e:
@@ -75,15 +70,16 @@ def exportAttendanceList(module_code_, database_name):
             connection_populate.close()
             cursor.close()
 
+
 def clearTempClassTable():
     global db_name
 
     try:
         connection_clear = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
-                                                      database='frame_database',
-                                                      user='admin',
-                                                      password='frame2020',
-                                                      )
+                                                   database='frame_database',
+                                                   user='admin',
+                                                   password='frame2020',
+                                                   )
 
         sql_insert_Query = """DELETE FROM `%s`"""
 
@@ -98,7 +94,6 @@ def clearTempClassTable():
         if connection_clear.is_connected():
             connection_clear.close()
             cursor.close()
-
 
 
 def populateAttendanceList(module_code):
@@ -162,9 +157,9 @@ def populateNewAttendanceList():
 
     try:
         connection_populate = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
-                                                    user='admin',
-                                                    password='frame2020',
-                                                    )
+                                                      user='admin',
+                                                      password='frame2020',
+                                                      )
 
         sql_populate_Query = """INSERT INTO `%s`.`%s` SELECT * FROM frame_database.`%s`"""
 
@@ -173,6 +168,7 @@ def populateNewAttendanceList():
         connection_populate.commit()
         print("[SQL] COPIED DATA {} ATTENDANCE LIST".format(db_name_2))
 
+        exportAttendanceList()
 
     except Error as e:
         print("Error reading data from MySQL table", e)
@@ -183,6 +179,8 @@ def populateNewAttendanceList():
 
 
 def getClassDate(current_time_and_date, room_number):
+    global TimeAndDate
+    timeAndDate = current_time_and_date
     time = 0
     try:
         connection = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',

@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ca512796-4963-4bc2-a80a-045b7bcba2cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/export.py" beforeDir="false" afterPath="$PROJECT_DIR$/export.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sqlForGui.py" beforeDir="false" afterPath="$PROJECT_DIR$/sqlForGui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/systemtimer.py" beforeDir="false" afterPath="$PROJECT_DIR$/systemtimer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +83,29 @@
       <recent name="C:\Users\James\Documents\GitHub\FRAME_FINAL\images" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.frame">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="FRAME_FINAL" />
+      <option name="INTERPRETER_OPTIONS" value="-m PyInstaller" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\ow\Documents\One Drive\OneDrive - University of Kent\Programming\Python\FRAME_FINAL\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="frame" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FRAME_FINAL" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -104,6 +128,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.Unnamed" />
+      <item itemvalue="Python.frame" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.frame" />
@@ -140,7 +168,9 @@
       <workItem from="1585221081244" duration="3030000" />
       <workItem from="1585224134970" duration="20221000" />
       <workItem from="1585310295931" duration="22172000" />
-      <workItem from="1585410190191" duration="11596000" />
+      <workItem from="1585410190191" duration="14909000" />
+      <workItem from="1585425444509" duration="2480000" />
+      <workItem from="1585428278876" duration="6419000" />
     </task>
     <task id="LOCAL-00001" summary="Added output folders">
       <created>1584718249426</created>
@@ -170,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585334925108</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Updated Code:&#10;- Database now has Room Temp tables that pull in the current class user information. Temp table gets copied to ModuleCode.ModuleCode_Timestamp in the database. Temp room table clears when class is finished, ready for new class information.&#10;&#10;TBA: &#10;Fix export PDF so it exports the newly copied and created table rather than the temp class table.">
+      <created>1585421987874</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1585421987874</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +217,8 @@
     <MESSAGE value="Added output folders" />
     <MESSAGE value="Updated Code:&#10;- Database Complete Rewrite&#10;- SQL Statements rewrite&#10;- Export database attendance table to PDF and email to lecturer's email&#10;- ++ lots more&#10;&#10;TBA:&#10;- Temp attendance database&#10;- Redesign GUI" />
     <MESSAGE value="Updated Code:&#10;- Menu bar with options (select room, student mode, about, credits, quit)&#10; - Select room (allows to set up what room the device should check classes from&#10; - Student mode (removes menu bar and window title, press ESC to revert)&#10; - About TBA&#10; - Credits (credits)&#10; - Quit (exits the program and closes all threads running)&#10;&#10;TBA:&#10;- Message boxes need to be redone to allow for pop up windows&#10;- Temp class room rather than new class every time&#10;- ++ more" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Code:&#10;- Menu bar with options (select room, student mode, about, credits, quit)&#10; - Select room (allows to set up what room the device should check classes from&#10; - Student mode (removes menu bar and window title, press ESC to revert)&#10; - About TBA&#10; - Credits (credits)&#10; - Quit (exits the program and closes all threads running)&#10;&#10;TBA:&#10;- Message boxes need to be redone to allow for pop up windows&#10;- Temp class room rather than new class every time&#10;- ++ more" />
+    <MESSAGE value="Updated Code:&#10;- Database now has Room Temp tables that pull in the current class user information. Temp table gets copied to ModuleCode.ModuleCode_Timestamp in the database. Temp room table clears when class is finished, ready for new class information.&#10;&#10;TBA: &#10;Fix export PDF so it exports the newly copied and created table rather than the temp class table." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Code:&#10;- Database now has Room Temp tables that pull in the current class user information. Temp table gets copied to ModuleCode.ModuleCode_Timestamp in the database. Temp room table clears when class is finished, ready for new class information.&#10;&#10;TBA: &#10;Fix export PDF so it exports the newly copied and created table rather than the temp class table." />
   </component>
   <component name="WindowStateProjectService">
     <state x="309" y="129" key="#Notifications" timestamp="1584718930853">
@@ -191,42 +229,42 @@
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="392" y="93" key="#SQL_Dialects/0.0.1600.870@0.0.1600.870" timestamp="1584917040663" />
-    <state x="392" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584901283430">
+    <state x="108" y="82" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585426113391">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="392" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.870@0.0.1600.870" timestamp="1584901283430" />
+    <state x="108" y="82" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.870@0.0.1600.870" timestamp="1585426113391" />
     <state x="130" y="185" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585224919355">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="130" y="185" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1600.870@0.0.1600.870" timestamp="1585224919355" />
-    <state x="200" y="0" key="CommitChangelistDialog2" timestamp="1585334923454">
+    <state x="200" y="0" key="CommitChangelistDialog2" timestamp="1585421987099">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="200" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1585334923454" />
+    <state x="200" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1585421987099" />
     <state x="187" y="190" key="FileChooserDialogImpl" timestamp="1585230795826">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="187" y="190" key="FileChooserDialogImpl/0.0.1600.870@0.0.1600.870" timestamp="1585230795826" />
-    <state width="765" height="228" key="GridCell.Tab.0.bottom" timestamp="1585421511296">
+    <state width="754" height="228" key="GridCell.Tab.0.bottom" timestamp="1585435912347">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="765" height="228" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1585421511296" />
-    <state width="765" height="228" key="GridCell.Tab.0.center" timestamp="1585421511296">
+    <state width="754" height="228" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1585435912347" />
+    <state width="754" height="228" key="GridCell.Tab.0.center" timestamp="1585435912346">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="765" height="228" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1585421511296" />
-    <state width="765" height="228" key="GridCell.Tab.0.left" timestamp="1585421511296">
+    <state width="754" height="228" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1585435912346" />
+    <state width="754" height="228" key="GridCell.Tab.0.left" timestamp="1585435912346">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="765" height="228" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1585421511296" />
-    <state width="765" height="228" key="GridCell.Tab.0.right" timestamp="1585421511296">
+    <state width="754" height="228" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1585435912346" />
+    <state width="754" height="228" key="GridCell.Tab.0.right" timestamp="1585435912347">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="765" height="228" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1585421511296" />
+    <state width="754" height="228" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1585435912347" />
     <state width="754" height="279" key="GridCell.Tab.1.bottom" timestamp="1585246668586">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
@@ -243,22 +281,23 @@
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="754" height="279" key="GridCell.Tab.1.right/0.0.1600.870@0.0.1600.870" timestamp="1585246668586" />
-    <state x="340" y="46" width="998" height="720" key="SettingsEditor" timestamp="1585328297834">
+    <state x="72" y="37" width="998" height="720" key="SettingsEditor" timestamp="1585427127067">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="50" y="13" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584556788406" />
-    <state x="340" y="46" width="998" height="720" key="SettingsEditor/0.0.1600.870@0.0.1600.870" timestamp="1585328297834" />
-    <state x="196" y="169" key="Vcs.Push.Dialog.v2" timestamp="1585334928074">
+    <state x="72" y="37" width="998" height="720" key="SettingsEditor/0.0.1600.870@0.0.1600.870" timestamp="1585427127067" />
+    <state x="196" y="169" key="Vcs.Push.Dialog.v2" timestamp="1585421996750">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="196" y="169" key="Vcs.Push.Dialog.v2/0.0.1600.870@0.0.1600.870" timestamp="1585334928074" />
+    <state x="196" y="169" key="Vcs.Push.Dialog.v2/0.0.1600.870@0.0.1600.870" timestamp="1585421996750" />
     <state x="667" y="268" key="com.intellij.ide.util.TipDialog" timestamp="1584571593454">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="667" y="268" key="com.intellij.ide.util.TipDialog/0.0.1600.870@0.0.1600.870" timestamp="1584571593454" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/F_R_A_M_E$frame.coverage" NAME="frame Coverage Results" MODIFIED="1585421511289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/F_R_A_M_E$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1585426077236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/F_R_A_M_E$frame.coverage" NAME="frame Coverage Results" MODIFIED="1585435859868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FRAME_FINAL$frame.coverage" NAME="frame Coverage Results" MODIFIED="1584714212282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

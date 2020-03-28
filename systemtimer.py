@@ -10,6 +10,7 @@ import sqlForGui
 import gui
 from datetime import datetime, date
 
+current_time_and_date = ''
 
 # Function that runs the system timer
 # When the system timer is 0, updates the SQL database with late and attended SQL queries
@@ -33,7 +34,8 @@ def systemTimer(system_timer):
         for i in gui.late_attendees:
             sqlForGui.updateClassTableLate(i)
 
-    sqlForGui.exportAttendanceList(sqlForGui.module_code, sqlForGui.db_name)
+        export_module_name = str(sqlForGui.module_code)
+        sqlForGui.createAttendanceList(export_module_name, current_time_and_date)
 
 
 def getCurrentTimeAndDate():
@@ -41,6 +43,7 @@ def getCurrentTimeAndDate():
     current_time = now.strftime("%H:%M:%S")
     today = date.today()
 
+    global current_time_and_date
     current_time_and_date = str(today) + " " + current_time
     print(current_time_and_date)
     sqlForGui.getClassDate(current_time_and_date, gui.finalRoomNumber)
