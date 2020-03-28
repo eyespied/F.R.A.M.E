@@ -29,7 +29,8 @@ late_attendees = []
 yes = False
 possibleRooms = ["Room_001", "Room_002", "Room_003"]
 finalRoomNumber = str(possibleRooms[0])
-
+converted_module_code = ''
+outputPath = "face_database/Photos_Taken/"
 
 # lateTimer that activates when late_timer reaches
 def lateTimer(late_timer):
@@ -56,7 +57,10 @@ def addUserToAttendList(userid):
 
 
 def updateGUIClassDetails():
+    global converted_module_code
     print("[GUI] CLASS DETAILS PRINTED TO WINDOW")
+    converted_module_code = sqlForGui.module_code
+    updateFilePath()
     classDetails = [str(sqlForGui.module_code), sqlForGui.classDate, sqlForGui.classDescription,
                     sqlForGui.classLecturer,
                     sqlForGui.classLength]
@@ -72,6 +76,10 @@ def updateGUIClassDetails():
     classDetails.place(relx=0.77, rely=0.15, relwidth=0.2, relheight=0.3)
     classDetails.after((sqlForGui.classLength * 1000), lambda: classDetails.place_forget())
 
+
+def updateFilePath():
+    global outputPath
+    outputPath += converted_module_code
 
 # Updates GUI with a tick if user is found in the system
 # @param userid - The User's ID
@@ -126,24 +134,18 @@ def updateGUINo():
     user.after(3000, lambda: user.place_forget())
 
 
-# TODO:
-#   - If User is in the system but not in the specific module don't add them to the attendance list
-#   - Possible approach: Make directories for each module code with student faces who attend that module
-#   - When module has been selected change the directory to the specific module code folder
-#   - This should eliminate the "Green ticks" even when not taking that module.
-#   - Doesn't affect the database table, just annoying...
-
 # Computes facial recognition
 # @param filename - photo take was taken
 def computeImage(filename):
     print("[INFO] CROSS-REFERENCING IMAGE")
 
     # Directory of cross-referenced photos
-    directory = "output/"
+    directory = "face_database/Recognized_Faces/" + converted_module_code
     file_names = os.listdir(directory)
 
     # Stores the current photo taken
-    picture_of_me = face_recognition.load_image_file("rawimages/{}".format(filename))
+    picture_of_me = face_recognition.load_image_file(
+        "face_database/Photos_Taken/" + converted_module_code + "/" + filename)
 
     try:
         my_face_encoding = face_recognition.face_encodings(picture_of_me)[0]
@@ -164,6 +166,7 @@ def computeImage(filename):
                         # Call UpdateGUI Yes function, passing in the userID and timestamp
                         if results[0]:
                             userID = ''.join(filter(lambda x: x.isdigit(), iPath))
+                            userID = userID[3:]
                             print("[INFO] USER FOUND | ID : {}".format(userID))
                             timestamp = (filename.rsplit(".", 1)[0])
                             updateGUIYes(userID, timestamp)
@@ -186,7 +189,7 @@ class FrameGUI:
 
     def __init__(self, vs):
         # Output path of photos taken
-        self.outputPath = 'rawimages'
+        global outputPath
         self.vs = vs
         self.frame = None
         self.thread = None
@@ -311,7 +314,8 @@ class FrameGUI:
             messagebox.showerror("Error", "Room Not Found")
             self.resetSubmittedValue()
             self.roomText.config(text='')
-# TODO: Convert all menu boxes to pop up windows
+
+    # TODO: Convert all menu boxes to pop up windows
 
     def selectRoom(self):
         text = """Enter Room Number:\n\n\n\n\n\n\n\n\n"""
@@ -411,7 +415,7 @@ class FrameGUI:
     def takeImage(self):
         timestamp = datetime.datetime.now()
         filename = "{}.jpg".format(timestamp.strftime("%Y-%m-%d_%H-%M-%S"))
-        p = os.path.sep.join((self.outputPath, filename))
+        p = os.path.sep.join((outputPath, filename))
         # Save file
         cv2.imwrite(p, self.frame.copy())
         print("[INFO] PHOTO SAVED TO OUTPUT DIR at", timestamp)
@@ -437,4 +441,3 @@ class FrameGUI:
         self.vs.stop()
         self.root.quit()
         os.kill(os.getpid(), signal.SIGINT)
-

@@ -3,6 +3,8 @@ __copyright__ = "Copyright 2020, F.R.A.M.E Project"
 __credits__ = ["James Clark", "Hugo A'Violet", "Sam Tredgett"]
 __version__ = "1.0"
 
+from datetime import datetime
+
 import mysql.connector
 from mysql.connector import Error
 
@@ -16,6 +18,8 @@ fname = ''
 lname = ''
 
 db_name = ''
+db_name_2 = ''
+
 module_code = ''
 export_list = [['User ID', 'First Name', 'Last Name', 'Attended', 'Late', 'Timestamp']]
 
@@ -24,12 +28,6 @@ classDate = ''
 classLength = ''
 classLecturer = ''
 lecturerEmail = ''
-
-# TODO:
-#       - Save class data from the class and copy it to a new table in a new database.
-#       - Clear class data from the class table
-#       - Update class data when new class is found
-#       - Repeat process
 
 
 def exportAttendanceList(module_code_, database_name):
@@ -65,6 +63,9 @@ def exportAttendanceList(module_code_, database_name):
 
         print(export_list)
         export.exportToPDF(export_list, export_module_name, export_file_name)
+        now = datetime.now()
+        str_now = str(now)
+        createAttendanceList(export_module_name, str_now)
 
 
     except Error as e:
@@ -74,10 +75,35 @@ def exportAttendanceList(module_code_, database_name):
             connection_populate.close()
             cursor.close()
 
-
-def populateAttendanceList(module_code, current_time_and_date):
+def clearTempClassTable():
     global db_name
-    db_name = str(module_code + " : " + current_time_and_date)
+
+    try:
+        connection_clear = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
+                                                      database='frame_database',
+                                                      user='admin',
+                                                      password='frame2020',
+                                                      )
+
+        sql_insert_Query = """DELETE FROM `%s`"""
+
+        cursor = connection_clear.cursor()
+        cursor.execute(sql_insert_Query, (db_name,))
+        connection_clear.commit()
+        print("[SQL] CLEARED TEMP ROOM".format(db_name))
+
+    except Error as e:
+        print("Error reading data from MySQL table", e)
+    finally:
+        if connection_clear.is_connected():
+            connection_clear.close()
+            cursor.close()
+
+
+
+def populateAttendanceList(module_code):
+    global db_name
+    db_name = gui.finalRoomNumber + "_Temp"
 
     try:
         connection_populate = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
@@ -105,27 +131,54 @@ def populateAttendanceList(module_code, current_time_and_date):
 
 def createAttendanceList(module_code, current_time_and_date):
     global db_name
-    db_name = str(module_code + " : " + current_time_and_date)
+    global db_name_2
+    db_name_2 = str(module_code + " : " + current_time_and_date)
+
     try:
         connection_create = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
-                                                    database='frame_database',
                                                     user='admin',
                                                     password='frame2020',
                                                     )
 
-        sql_create_Query = """CREATE TABLE `%s` LIKE `class_template`"""
+        sql_create_Query = """CREATE TABLE `%s`.`%s` LIKE frame_database.`%s`"""
 
         cursor = connection_create.cursor()
-        cursor.execute(sql_create_Query, (db_name,))
-        print("[SQL] CREATED {} ATTENDANCE LIST".format(db_name))
-
-        populateAttendanceList(module_code, current_time_and_date)
+        cursor.execute(sql_create_Query, (module_code, db_name_2, db_name))
+        print("[SQL] CREATED {} ATTENDANCE LIST".format(db_name_2))
+        populateNewAttendanceList()
+        clearTempClassTable()
 
     except Error as e:
         print("Error reading data from MySQL table", e)
     finally:
         if connection_create.is_connected():
             connection_create.close()
+            cursor.close()
+
+
+def populateNewAttendanceList():
+    global db_name_2
+    global db_name
+
+    try:
+        connection_populate = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
+                                                    user='admin',
+                                                    password='frame2020',
+                                                    )
+
+        sql_populate_Query = """INSERT INTO `%s`.`%s` SELECT * FROM frame_database.`%s`"""
+
+        cursor = connection_populate.cursor()
+        cursor.execute(sql_populate_Query, (module_code, db_name_2, db_name))
+        connection_populate.commit()
+        print("[SQL] COPIED DATA {} ATTENDANCE LIST".format(db_name_2))
+
+
+    except Error as e:
+        print("Error reading data from MySQL table", e)
+    finally:
+        if connection_populate.is_connected():
+            connection_populate.close()
             cursor.close()
 
 
@@ -165,7 +218,7 @@ def getClassDate(current_time_and_date, room_number):
             lecturerEmail = row[6]
 
         if time > 0:
-            createAttendanceList(module_code, current_time_and_date)
+            populateAttendanceList(module_code)
             gui.updateGUIClassDetails()
             systemtimer.startSystemTimer(time)
 
