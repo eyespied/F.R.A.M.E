@@ -3,12 +3,10 @@ __copyright__ = "Copyright 2020, F.R.A.M.E Project"
 __credits__ = ["James Clark", "Hugo A'Violet", "Sam Tredgett"]
 __version__ = "1.0"
 
+# Import in necessary libraries
 import time
-from datetime import datetime
-
 import mysql.connector
 from mysql.connector import Error
-
 import gui
 import systemtimer
 import export
@@ -18,12 +16,16 @@ user = ''
 fname = ''
 lname = ''
 
+# Initializes the db_name and db_name 2
 db_name = ''
 db_name_2 = ''
 
+# Initializes the module code
 module_code = ''
+# Export list titles for the pdf
 export_list = [['User ID', 'First Name', 'Last Name', 'Attended', 'Late', 'Timestamp']]
 
+# Initializes the class variables
 classDescription = ''
 classDate = ''
 classLength = ''
@@ -31,9 +33,12 @@ classLecturer = ''
 lecturerEmail = ''
 
 
+# Function that takes all of the data from the current Room Class
 def exportAttendanceList():
     global db_name_2
+    # Replaces the db_name_2 to not include colons, this is so it can export to the output folder
     replace = db_name_2.replace(':', '-')
+    # Stores the new variable in export_file_name
     export_file_name = str(replace)
     export_module_name = str(module_code)
 
@@ -57,21 +62,26 @@ def exportAttendanceList():
             attended = (row[3])
             late = (row[4])
             time_stamp = (row[5])
+            # Stores all of data from each row in a values list
             values = [classid, first_name, last_name, attended, late, time_stamp]
+            # Adds each values list to the export list of lists
             export_list.append(values)
 
         print(export_list)
+        # Calls the export to PDF function
+        # @params - export list, the module code and the filename
         export.exportToPDF(export_list, export_module_name, export_file_name)
-
 
     except Error as e:
         print("Error reading data from MySQL table", e)
+
     finally:
         if connection_populate.is_connected():
             connection_populate.close()
             cursor.close()
 
 
+# Function that deletes all of the data from the Room class table
 def clearTempClassTable():
     global db_name
 
@@ -97,6 +107,8 @@ def clearTempClassTable():
             cursor.close()
 
 
+# Populate function that takes the data from the module_code table
+# Inserts the data into the Room table
 def populateAttendanceList(module_code):
     global db_name
     db_name = gui.finalRoomNumber + "_Temp"
@@ -125,6 +137,9 @@ def populateAttendanceList(module_code):
             cursor.close()
 
 
+# Creates a new attendanceList table
+# Stores the data in the current module_code database
+# Creates the table name: module_code + class_start_date
 def createAttendanceList(module_code, current_time_and_date):
     global db_name
     global db_name_2
@@ -152,6 +167,7 @@ def createAttendanceList(module_code, current_time_and_date):
             cursor.close()
 
 
+# Populates the newly created table with the data from the Room Class Table
 def populateNewAttendanceList():
     global db_name_2
     global db_name
@@ -169,6 +185,7 @@ def populateNewAttendanceList():
         connection_populate.commit()
         print("[SQL] COPIED DATA {} ATTENDANCE LIST".format(db_name_2))
 
+        # Once this has been populated it calls the exportAttendanceList function
         time.sleep(1)
         exportAttendanceList()
 
@@ -180,6 +197,7 @@ def populateNewAttendanceList():
             cursor.close()
 
 
+# Function that continually checks the date/time matches a classDate from the current room
 def getClassDate(current_time_and_date, room_number):
     global TimeAndDate
     timeAndDate = current_time_and_date

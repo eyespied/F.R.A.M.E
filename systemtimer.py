@@ -14,7 +14,8 @@ current_time_and_date = ''
 
 
 # Function that runs the system timer
-# When the system timer is 0, updates the SQL database with late and attended SQL queries
+# When the system timer reaches 15, updates the SQL database with late and attended SQL queries
+# Also calls the createAttendanceList function, takes the current module code and class time and date.
 
 def systemTimer(system_timer):
     global timerOver
@@ -42,6 +43,10 @@ def systemTimer(system_timer):
     sqlForGui.createAttendanceList(export_module_name, current_time_and_date)
 
 
+# Function that gets the current time and date.
+# Calls the getClassDate sql statement to check if the date/time matches a class.
+# @params, current time and date, and the room number selected on start up. Default = Room_001
+
 def getCurrentTimeAndDate():
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
@@ -53,8 +58,12 @@ def getCurrentTimeAndDate():
     sqlForGui.getClassDate(current_time_and_date, gui.finalRoomNumber)
 
 
+# Initializes global variable
 classCheckOver = True
 
+
+# Class check function that checks if a class is found.
+# Get the current time and date, and recursively calls itself again.
 
 def classCheck():
     timer = 0
@@ -72,6 +81,10 @@ def classCheck():
         classCheck()
 
 
+# Function that starts both the class thread and the late thread.
+# @param class_length this is the class length for the class found on the database.
+
+
 def startSystemTimer(class_length):
     # Starts thread for class timer
 
@@ -81,10 +94,12 @@ def startSystemTimer(class_length):
     system_thread.start()
     late_thread.start()
 
+    # Joins both threads together, so nothing else runs until these are finished.
     system_thread.join()
     late_thread.join()
 
 
+# Initializes isLate boolean.
 isLate = False
 
 

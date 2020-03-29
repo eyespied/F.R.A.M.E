@@ -1,13 +1,16 @@
-import time
+__author__ = "James Clark, Hugo A'Violet, Sam Tredgett"
+__copyright__ = "Copyright 2020, F.R.A.M.E Project"
+__credits__ = ["James Clark", "Hugo A'Violet", "Sam Tredgett"]
+__version__ = "1.0"
 
-from reportlab.lib.units import inch
+# Import in necessary libraries
+import time
 
 import sqlForGui
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import Table
 
-import email
 import smtplib
 import ssl
 from email import encoders
@@ -15,18 +18,21 @@ from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+# Stores the logo
 logo = 'images/uok_logo.jpg'
+# Sets width and height variables to equal the letter
 Width, Height = letter
+# Stores the title heading
 Title = "Attendance List"
 
 
-# Define the fixed features of the first page of the document
+# Defines the first page and draws the logo into the top left corner.
 def myFirstPage(canvas, pdf):
     canvas.saveState()
-
     canvas.drawImage(logo, 0, 710, width=100, height=100, preserveAspectRatio=True)
 
 
+# Exports the PDF with the current export list, module code and filename
 def exportToPDF(export_list, export_module_code, export_filename):
     data = export_list
     filename = ("PDF/" + export_module_code + "/" + export_filename + ".pdf")
@@ -62,9 +68,12 @@ def exportToPDF(export_list, export_module_code, export_filename):
     elems = [table]
     pdf.build(elems, onFirstPage=myFirstPage)
     time.sleep(1)
+    # Calls the sendEmailToLecturer function
     sendEmailToLecturer(filename)
 
 
+# Sends the email to the lecturer
+# @params pdf = the pdf that was generated
 def sendEmailToLecturer(pdf):
     subject = str(sqlForGui.db_name_2)
     body = "Automated email, send with attached attendance form - F.R.A.M.E"
@@ -81,6 +90,8 @@ def sendEmailToLecturer(pdf):
     # Add body to email
     message.attach(MIMEText(body, "plain"))
 
+    # Sets the filename to the pdf
+    # Sets the title of the document to the filename directory removing the folder names
     filename = pdf
     title = filename[10:]
 

@@ -3,13 +3,6 @@ __copyright__ = "Copyright 2020, F.R.A.M.E Project"
 __credits__ = ["James Clark", "Hugo A'Violet", "Sam Tredgett"]
 __version__ = "1.0"
 
-# TODO:
-#   - Check threading, end a thread if not needed.
-#   - Export out of one-drive check speeds
-#   - Clean up code / redundant code
-#   - Comment all code so its up to date
-#   - custom video filter?
-
 # Import in necessary libraries
 from gui import FrameGUI
 import systemtimer
@@ -17,9 +10,11 @@ from imutils.video import VideoStream
 import time
 import threading
 
+# Sets global variable, ifClass checks sets a current class in progress to True or False
 ifClass = False
 
 
+# If class isn't in progress creates a thread and calls classCheck function
 def classCheck_():
     global ifClass
     class_check = threading.Thread(target=systemtimer.classCheck)

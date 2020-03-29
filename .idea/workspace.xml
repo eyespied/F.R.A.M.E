@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca512796-4963-4bc2-a80a-045b7bcba2cf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/images/button_two.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/export.py" beforeDir="false" afterPath="$PROJECT_DIR$/export.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frame.py" beforeDir="false" afterPath="$PROJECT_DIR$/frame.py" afterDir="false" />
@@ -172,7 +173,7 @@
       <workItem from="1585410190191" duration="14909000" />
       <workItem from="1585425444509" duration="2480000" />
       <workItem from="1585428278876" duration="7612000" />
-      <workItem from="1585477207824" duration="7230000" />
+      <workItem from="1585477207824" duration="12860000" />
     </task>
     <task id="LOCAL-00001" summary="Added output folders">
       <created>1584718249426</created>
@@ -216,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585436421931</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Updated Code:&#10;- Fixed threads so they not work in parallel, and the class database gets updated before class is finished. This is so the program has time to re-initialize class checking. (set to 15 seconds before at the momment) &#10;&#10;TBA:&#10;- Re-skin the module code pop up window.&#10;- Comment code&#10;- Remove redundant code&#10;- Start to populate DB">
+      <created>1585484763863</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1585484763863</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +236,8 @@
     <MESSAGE value="Updated Code:&#10;- Menu bar with options (select room, student mode, about, credits, quit)&#10; - Select room (allows to set up what room the device should check classes from&#10; - Student mode (removes menu bar and window title, press ESC to revert)&#10; - About TBA&#10; - Credits (credits)&#10; - Quit (exits the program and closes all threads running)&#10;&#10;TBA:&#10;- Message boxes need to be redone to allow for pop up windows&#10;- Temp class room rather than new class every time&#10;- ++ more" />
     <MESSAGE value="Updated Code:&#10;- Database now has Room Temp tables that pull in the current class user information. Temp table gets copied to ModuleCode.ModuleCode_Timestamp in the database. Temp room table clears when class is finished, ready for new class information.&#10;&#10;TBA: &#10;Fix export PDF so it exports the newly copied and created table rather than the temp class table." />
     <MESSAGE value="Updated Code:&#10;- Continued work on the GUI. I'd say it's now basically finished, with maybe minor touches to the GUI as required.&#10;- Decided to instead of doing message boxes over the videoStream to provide a on-screen keyboard that the user can input the room numbers into.&#10;- This can further be expanded to include a keyboard with certain letters if necessary. However, it's out of scope at this stage.&#10;&#10;TBA:&#10;- Populate the database with Lecturers + Students, their faces and a populate rest of database, including more modules and classes.&#10;&#10;Before &quot;The big test&quot;:&#10;- Optimize code, this includes checking all of the threads work / close when needed. This will speed up the program.&#10;- Will also export out of One Drive before running for best performance.&#10;- Clean up print statements in cmd line as well before the test.&#10;- Comment all new code!&#10;&#10;&quot;The big test&quot;:&#10;- Run a day simulation to see how well the code performs. (can record screen throughout for video)&#10;&#10;Analytics (?):&#10;- Will look into doing something with the data from the SQL when I have time, could be interesting to add this into our technical report! (bonus marks)&#10;- Might use matpotlib to create a secondary smaller program that can extract the sql data, convert to visual representations and email to lecturers." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Code:&#10;- Continued work on the GUI. I'd say it's now basically finished, with maybe minor touches to the GUI as required.&#10;- Decided to instead of doing message boxes over the videoStream to provide a on-screen keyboard that the user can input the room numbers into.&#10;- This can further be expanded to include a keyboard with certain letters if necessary. However, it's out of scope at this stage.&#10;&#10;TBA:&#10;- Populate the database with Lecturers + Students, their faces and a populate rest of database, including more modules and classes.&#10;&#10;Before &quot;The big test&quot;:&#10;- Optimize code, this includes checking all of the threads work / close when needed. This will speed up the program.&#10;- Will also export out of One Drive before running for best performance.&#10;- Clean up print statements in cmd line as well before the test.&#10;- Comment all new code!&#10;&#10;&quot;The big test&quot;:&#10;- Run a day simulation to see how well the code performs. (can record screen throughout for video)&#10;&#10;Analytics (?):&#10;- Will look into doing something with the data from the SQL when I have time, could be interesting to add this into our technical report! (bonus marks)&#10;- Might use matpotlib to create a secondary smaller program that can extract the sql data, convert to visual representations and email to lecturers." />
+    <MESSAGE value="Updated Code:&#10;- Fixed threads so they not work in parallel, and the class database gets updated before class is finished. This is so the program has time to re-initialize class checking. (set to 15 seconds before at the momment) &#10;&#10;TBA:&#10;- Re-skin the module code pop up window.&#10;- Comment code&#10;- Remove redundant code&#10;- Start to populate DB" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Code:&#10;- Fixed threads so they not work in parallel, and the class database gets updated before class is finished. This is so the program has time to re-initialize class checking. (set to 15 seconds before at the momment) &#10;&#10;TBA:&#10;- Re-skin the module code pop up window.&#10;- Comment code&#10;- Remove redundant code&#10;- Start to populate DB" />
   </component>
   <component name="WindowStateProjectService">
     <state x="309" y="129" key="#Notifications" timestamp="1584718930853">
@@ -247,34 +256,34 @@
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="130" y="185" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1600.870@0.0.1600.870" timestamp="1585224919355" />
-    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1585436420657">
+    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1585484762693">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1585436420657" />
+    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1585484762693" />
     <state x="187" y="190" key="FileChooserDialogImpl" timestamp="1585230795826">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="187" y="190" key="FileChooserDialogImpl/0.0.1600.870@0.0.1600.870" timestamp="1585230795826" />
-    <state width="754" height="228" key="GridCell.Tab.0.bottom" timestamp="1585484484242">
+    <state width="1557" height="228" key="GridCell.Tab.0.bottom" timestamp="1585487010825">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="228" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1585484484242" />
-    <state width="754" height="228" key="GridCell.Tab.0.center" timestamp="1585484484242">
+    <state width="1557" height="228" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1585487010825" />
+    <state width="1557" height="228" key="GridCell.Tab.0.center" timestamp="1585487010825">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="228" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1585484484242" />
-    <state width="754" height="228" key="GridCell.Tab.0.left" timestamp="1585484484241">
+    <state width="1557" height="228" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1585487010825" />
+    <state width="1557" height="228" key="GridCell.Tab.0.left" timestamp="1585487010825">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="228" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1585484484241" />
-    <state width="754" height="228" key="GridCell.Tab.0.right" timestamp="1585484484242">
+    <state width="1557" height="228" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1585487010825" />
+    <state width="1557" height="228" key="GridCell.Tab.0.right" timestamp="1585487010825">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="228" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1585484484242" />
+    <state width="1557" height="228" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1585487010825" />
     <state width="768" height="279" key="GridCell.Tab.1.bottom" timestamp="1585481793866">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
@@ -296,10 +305,10 @@
     </state>
     <state x="50" y="13" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584556788406" />
     <state x="72" y="37" width="998" height="720" key="SettingsEditor/0.0.1600.870@0.0.1600.870" timestamp="1585427127067" />
-    <state x="196" y="169" key="Vcs.Push.Dialog.v2" timestamp="1585436452614">
+    <state x="196" y="169" key="Vcs.Push.Dialog.v2" timestamp="1585484774542">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="196" y="169" key="Vcs.Push.Dialog.v2/0.0.1600.870@0.0.1600.870" timestamp="1585436452614" />
+    <state x="196" y="169" key="Vcs.Push.Dialog.v2/0.0.1600.870@0.0.1600.870" timestamp="1585484774542" />
     <state x="667" y="268" key="com.intellij.ide.util.TipDialog" timestamp="1584571593454">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
@@ -307,7 +316,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/F_R_A_M_E$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1585426077236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/F_R_A_M_E$frame.coverage" NAME="frame Coverage Results" MODIFIED="1585484484233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/F_R_A_M_E$frame.coverage" NAME="frame Coverage Results" MODIFIED="1585486950388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FRAME_FINAL$frame.coverage" NAME="frame Coverage Results" MODIFIED="1584714212282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

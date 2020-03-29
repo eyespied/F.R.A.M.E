@@ -28,9 +28,13 @@ attendees = []
 # Stores late attended UserID's in a list
 late_attendees = []
 yes = False
+# Lists all possible rooms the user can choose
 possibleRooms = ["Room_001", "Room_002", "Room_003"]
+# Stores the room number chosen, Default: Room_001
 finalRoomNumber = str(possibleRooms[0])
+# Converts module code to string
 converted_module_code = ''
+# Output path for photos taken, when pressing "Sign in" on GUI
 outputPath = "face_database/Photos_Taken/"
 
 
@@ -44,6 +48,7 @@ def addUserToAttendList(userid):
         print("[INFO] ADDED USER TO LATE-ATTENDANCE LIST")
 
 
+# Prints a label containing the class details when is found.
 def updateGUIClassDetails():
     global converted_module_code
     print("[GUI] CLASS DETAILS PRINTED TO WINDOW")
@@ -55,16 +60,23 @@ def updateGUIClassDetails():
 
     classLength = (sqlForGui.classLength / 60)
 
-    classDetailsText = str(sqlForGui.classDate) + "\n\n" + str(sqlForGui.module_code) + "\n\n" + str(
-        sqlForGui.classDescription) + "\n" \
-                       + str(classLength) + " Hour(s)" + "\n\n" + str(sqlForGui.classLecturer)
+    classDetailsText = str(sqlForGui.classDate) + "\n\n" \
+                       + "\n" + str(sqlForGui.module_code) \
+                       + "\n" + str(sqlForGui.classDescription) \
+                       + "\n" + str(classLength) + " Hour(s)" \
+                       + "\n\n" + "Lecturer Details:" \
+                       + "\n" + str(sqlForGui.classLecturer) \
+                       + "\n" + str(sqlForGui.lecturerEmail)
 
     print(classDetails)
-    classDetails = tk.Label(FrameGUI.root, text=classDetailsText, font=30)
+    classDetails = tk.Label(FrameGUI.root, text=classDetailsText, font=("Helvetica", 12), bg='#05345C',
+                            foreground="white", borderwidth=1, relief="solid")
     classDetails.place(relx=0.77, rely=0.15, relwidth=0.2, relheight=0.3)
     classDetails.after((sqlForGui.classLength * 1000), lambda: classDetails.place_forget())
 
 
+# Updates the filePath depending on what module_code the class is.
+# This is so not all faces are stored in one folder, it's separated between module_codes
 def updateFilePath():
     global outputPath
     outputPath += converted_module_code
@@ -155,6 +167,7 @@ def computeImage(filename):
                         # Call UpdateGUI Yes function, passing in the userID and timestamp
                         if results[0]:
                             userID = ''.join(filter(lambda x: x.isdigit(), iPath))
+                            # Removes the folder path from the UserID
                             userID = userID[3:]
                             print("[INFO] USER FOUND | ID : {}".format(userID))
                             timestamp = (filename.rsplit(".", 1)[0])
@@ -222,9 +235,13 @@ class FrameGUI:
         self.root.iconbitmap('images/favicon.ico')
         self.root.title("F.R.A.M.E - Facial Recognition Attendance Monitoring Engine")
         self.root.geometry('1280x720')
+
+        # Settings a max and min size of the window
+        # Max is a little larger to accommodate for when entering Student Mode
         self.root.maxsize(CANVAS_WIDTH, CANVAS_HEIGHT)
         self.root.minsize(1280, 720)
 
+        # Binds the "Escape" Key to admin mode. This reverts student mode, revealing the menu bar and window again.
         self.root.bind('<Escape>', self.adminMode)
 
         # Creates canvas, which is a child of root and sets the size of the window
@@ -256,7 +273,6 @@ class FrameGUI:
         self.photo = ImageTk.PhotoImage(self.buttonImage)
         self.button = tk.Button(self.buttonFrame, image=self.photo, bg='#05345C', highlightcolor='#05345C',
                                 activebackground='#003882', command=self.takeImage)
-        # button.bind('<Configure>', resizeImages.resize_image())
         self.button.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         # Creates a frame for the title of our project 'F.R.A.M.E'
@@ -268,7 +284,6 @@ class FrameGUI:
         self.titleImageCopy = self.titleImage.copy()
         self.photo2 = ImageTk.PhotoImage(self.titleImage)
         self.title = tk.Label(self.titleFrame, image=self.photo2, bg='#05345C')
-        # title.bind('<Configure>', resizeImages.resize_image2)
         self.title.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         # Background Image
@@ -276,7 +291,6 @@ class FrameGUI:
         self.background_imageCopy = self.background_image.copy()
         self.photo3 = ImageTk.PhotoImage(self.background_image)
         self.background_label = tk.Label(canvas, image=self.photo3)
-        # background_label.bind('<Configure>', resizeImages.resize_image3)
         self.background_label.place(relx=0, rely=0, relwidth=1, relheight=1)
         self.stopEvent = threading.Event()
 
@@ -284,31 +298,41 @@ class FrameGUI:
         self.thread.start()
         self.root.wm_protocol("WM_DELETE_WINDOW", self.onClose)
 
-    # Class that deals with the GUI
+    # Appends the roomText label text, depending on what button is pressed in "Select Room"
     def appendRoomNumber(self, value):
         self.submittedValue = self.submittedValue + str(value)
         print(self.submittedValue)
         self.roomText.config(text=self.submittedValue)
 
+    # Resets the roomText value to nothing, important when cancelling or error message appears.
     def resetSubmittedValue(self):
         self.submittedValue = ''
 
+    # Function that gets the roomNumber inputted when pressing the "Select Room" buttons.
     def getRoomNumber(self):
         global finalRoomNumber
         print("SUBMITTED VALUE {}".format(self.submittedValue))
+        # Concatenates the user submitted value with "Room_". This is so it can be compares to the possibleRooms list.
         submittedValue_ = "Room_" + self.submittedValue
 
+        # Loops through the possible rooms until it finds one that matches.
+        # Sets the finalRoomNumber to the userSubmittedValue
         if submittedValue_ in possibleRooms:
             print("Valid room given")
             finalRoomNumber = submittedValue_
             print(finalRoomNumber)
             self.resetSubmittedValue()
             self.removeSelectRoom()
+        # If room not in the PossibleRooms, print a error message to the GUI and reset the submittedValue and roomText.
         else:
-            messagebox.showerror("Error", "Room Not Found")
+            messagebox.showerror("F.R.A.M.E", "Room Not Found")
             self.resetSubmittedValue()
             self.roomText.config(text='')
 
+    # SelectRoom, creates the GUI interface for selecting a room.
+    # Places a GUI Label containing the roomNumber.
+    # Places a make-shift keyboard made out of 0-9 digits, including a submit and cancel button.
+    # When a digit is clicked, appendRoomNumber is called with the corresponding digit as a param.
     def selectRoom(self):
         text = """Room\n\n\n\n\n"""
         self.selectRoomLab = tk.Label(FrameGUI.root, text=text, font=("Helvetica", 22), bg='#05345C',
@@ -325,45 +349,61 @@ class FrameGUI:
 
         # Buttons
         self.one_button = tk.Button(self.textMessageBox, text="0", font=("Helvetica", 22),
+                                    bg="white", foreground="black",
                                     command=lambda *args: self.appendRoomNumber(0))
         self.one_button.place(relx=0, rely=0.05, relwidth=0.1, relheight=0.5)
         self.two_button = tk.Button(self.textMessageBox, text="1", font=("Helvetica", 22),
+                                    bg="white", foreground="black",
                                     command=lambda *args: self.appendRoomNumber(1))
         self.two_button.place(relx=0.1, rely=0.05, relwidth=0.1, relheight=0.5)
         self.two_button.place(relx=0.1, rely=0.05, relwidth=0.1, relheight=0.5)
         self.three_button = tk.Button(self.textMessageBox, text="2", font=("Helvetica", 22),
+                                      bg="white", foreground="black",
                                       command=lambda *args: self.appendRoomNumber(2))
         self.three_button.place(relx=0.2, rely=0.05, relwidth=0.1, relheight=0.5)
         self.four_button = tk.Button(self.textMessageBox, text="3", font=("Helvetica", 22),
+                                     bg="white", foreground="black",
                                      command=lambda *args: self.appendRoomNumber(3))
         self.four_button.place(relx=0.3, rely=0.05, relwidth=0.1, relheight=0.5)
         self.five_button = tk.Button(self.textMessageBox, text="4", font=("Helvetica", 22),
+                                     bg="white", foreground="black",
                                      command=lambda *args: self.appendRoomNumber(4))
         self.five_button.place(relx=0.4, rely=0.05, relwidth=0.1, relheight=0.5)
         self.six_button = tk.Button(self.textMessageBox, text="5", font=("Helvetica", 22),
+                                    bg="white", foreground="black",
                                     command=lambda *args: self.appendRoomNumber(5))
         self.six_button.place(relx=0.5, rely=0.05, relwidth=0.1, relheight=0.5)
         self.seven_button = tk.Button(self.textMessageBox, text="6", font=("Helvetica", 22),
+                                      bg="white", foreground="black",
                                       command=lambda *args: self.appendRoomNumber(6))
         self.seven_button.place(relx=0.6, rely=0.05, relwidth=0.1, relheight=0.5)
         self.eight_button = tk.Button(self.textMessageBox, text="7", font=("Helvetica", 22),
+                                      bg="white", foreground="black",
                                       command=lambda *args: self.appendRoomNumber(7))
         self.eight_button.place(relx=0.7, rely=0.05, relwidth=0.1, relheight=0.5)
         self.nine_button = tk.Button(self.textMessageBox, text="8", font=("Helvetica", 22),
+                                     bg="white", foreground="black",
                                      command=lambda *args: self.appendRoomNumber(8))
         self.nine_button.place(relx=0.8, rely=0.05, relwidth=0.1, relheight=0.5)
         self.ten_button = tk.Button(self.textMessageBox, text="9", font=("Helvetica", 22),
+                                    bg="white", foreground="black",
                                     command=lambda *args: self.appendRoomNumber(9))
         self.ten_button.place(relx=0.9, rely=0.05, relwidth=0.1, relheight=0.5)
 
+        # Submit button calls the getRoomFunction
         self.submitButton = tk.Button(self.textMessageBox, text="Submit", font=("Helvetica", 22),
+                                      bg="white", foreground="black",
                                       command=self.getRoomNumber)
         self.submitButton.place(relx=0.2, rely=0.6, relwidth=0.2, relheight=0.35)
+        # Cancel button removes the Select Room GUI.
         self.cancelButton = tk.Button(self.textMessageBox, text="Cancel", font=("Helvetica", 22),
+                                      bg="white", foreground="black",
                                       command=self.removeSelectRoom)
         self.cancelButton.place(relx=0.6, rely=0.6, relwidth=0.2, relheight=0.35)
         print("[GUI] SELECT_ROOM PRINTED TO WINDOW")
 
+    # Function to remove the Select Room GUI when cancel button is pressed or, a correct room number was entered.
+    # Also resets the submitted value and roomText label to empty.
     def removeSelectRoom(self):
         print("[GUI] REMOVED SELECT ROOM")
         self.selectRoomLab.destroy()
@@ -384,24 +424,35 @@ class FrameGUI:
         self.nine_button.destroy()
         self.ten_button.destroy()
 
+    # Function that prints out a How-To-Use label.
+    # Explains selecting a room, student mode, attendance states, and exporting to pdf.
     def howToUseLabel(self):
         print("[GUI] HOW-TO-USE PRINTED TO WINDOW")
 
-        text = "About" + "\n\n" + "Select Room:" + "\n" + "Placeholder" + "\n\n" + "Sign in states:" + "\n" + \
-               "Placeholder" + "\n\n" + "Email:" + "\n" + "Placeholder" + "\n\n" + "Student Mode:" + \
-               "\n" + "Placeholder"
-        self.howToUseLab = tk.Label(FrameGUI.root, text=text, font=("Helvetica", 12), bg='#05345C', foreground="white",
+        text = "About\n" + "\n\n" + "Room:" + "\n" + "Select a room within the 'Help' menubar" + "\n\n" \
+               + "Student Mode:" + "\n" + \
+               "Set to Student Mode once room selected" + "\n\n" + "States:" + "\n" + \
+               "Green Tick = On-Time " + "\n" + "Amber Tick = Late " + "\n" \
+               + "Red Cross = No Face Found" + \
+               "\n\n" + "Email:" + \
+               "\n" + "Lecturer receives an email after class\n\n\n\n\n"
+
+        self.howToUseLab = tk.Label(FrameGUI.root, text=text, font=("Helvetica", 11), bg='#05345C', foreground="white",
                                     borderwidth=1, relief="solid")
         self.howToUseLab.place(relx=0.77, rely=0.15, relwidth=0.21, relheight=0.6)
-        self.howToUseButton = tk.Button(self.howToUseLab, text="Close", font=("Helvetica", 16),
+        self.howToUseButton = tk.Button(self.howToUseLab, text="Close", font=("Helvetica", 11),
+                                        bg="white", foreground="black",
                                         command=self.removeHowToUse)
         self.howToUseButton.place(relx=0.30, rely=0.85, relwidth=0.4, relheight=0.1)
 
+    # Removes the How-To-Use label
     def removeHowToUse(self):
         print("[GUI] REMOVED ABOUT ROOM")
         self.howToUseLab.destroy()
         self.howToUseButton.destroy()
 
+    # Creates a credits label that disappears after 4 seconds.
+    # Shows what our team members have worked on.
     def creditsLabel(self):
         print("[GUI] CREDITS PRINTED TO WINDOW")
         text = "Credits" + "\n\n" + "Programming:" + "\n" + "James Clark" + "\n\n" + "Database Design:" + "\n" + \
@@ -444,28 +495,32 @@ class FrameGUI:
         # Calls facial recognition function
         computeImage(filename)
 
+    # studentMode that removes the window title and menu bar.
     def studentMode(self):
         self.emptyMenu = tk.Menu(self.root)
         self.root.config(menu=self.emptyMenu)
         self.root.overrideredirect(True)
-        # self.menubar.entryconfig("Help", state="disabled")
         print("[GUI] STUDENT MODE ENABLED")
 
+    # adminMode that re-enables the menubar and window title.
     def adminMode(self, event):
         self.root.config(menu=self.menubar)
         self.root.overrideredirect(False)
         print("[GUI] ADMIN MODE ENABLED")
 
+    # Function that is called when quit in the menubar is pressed.
+    # Prompts the user to make sure they want to quit.
     def closeQuestion(self):
         msgBox = tk.messagebox.askquestion('F.R.A.M.E', 'Are you sure you want to exit the application?\n'
                                                         '(This will terminate all class schedule checks)',
-                                                        icon='warning')
+                                           icon='warning')
         if msgBox == 'yes':
             FrameGUI.onClose(self)
         else:
             pass
 
     # Closes application when X is clicked
+    # Also called if 'yes' is selected from the closeQuestion function.
     def onClose(self):
         print("[INFO] APPLICATION CLOSING")
         self.stopEvent.set()
