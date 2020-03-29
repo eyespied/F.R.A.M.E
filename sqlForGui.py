@@ -23,8 +23,8 @@ db_name_2 = ''
 # Initializes the module code
 module_code = ''
 # Export list titles for the pdf
-export_list = [['User ID', 'First Name', 'Last Name', 'Attended', 'Late', 'Timestamp']]
-
+export_list_default = [['User ID', 'First Name', 'Last Name', 'Attended', 'Late', 'Timestamp']]
+export_list = [[]]
 # Initializes the class variables
 classDescription = ''
 classDate = ''
@@ -35,7 +35,7 @@ lecturerEmail = ''
 
 # Function that takes all of the data from the current Room Class
 def exportAttendanceList():
-    global db_name_2
+    global db_name_2, default_values
     # Replaces the db_name_2 to not include colons, this is so it can export to the output folder
     replace = db_name_2.replace(':', '-')
     # Stores the new variable in export_file_name
@@ -53,7 +53,9 @@ def exportAttendanceList():
         cursor = connection_populate.cursor()
         cursor.execute(sql_insert_Query, (module_code, db_name_2,))
         records = cursor.fetchall()
-        print("[SQL] EXPORTED {} ATTENDANCE LIST WITH STUDENTS".format(db_name_2))
+
+        # Adds the default headers to the export list
+        export_list.extend(export_list_default)
 
         for row in records:
             classid = (row[0])
@@ -64,13 +66,16 @@ def exportAttendanceList():
             time_stamp = (row[5])
             # Stores all of data from each row in a values list
             values = [classid, first_name, last_name, attended, late, time_stamp]
-            # Adds each values list to the export list of lists
+            # Adds each values to the list
             export_list.append(values)
 
-        print(export_list)
         # Calls the export to PDF function
         # @params - export list, the module code and the filename
         export.exportToPDF(export_list, export_module_name, export_file_name)
+
+        # Reset export list
+        export_list.clear()
+
 
     except Error as e:
         print("Error reading data from MySQL table", e)
@@ -97,7 +102,7 @@ def clearTempClassTable():
         cursor = connection_clear.cursor()
         cursor.execute(sql_insert_Query, (db_name,))
         connection_clear.commit()
-        print("[SQL] CLEARED TEMP ROOM".format(db_name))
+        print("[SQL] RESET ROOM DATA".format(db_name))
 
     except Error as e:
         print("Error reading data from MySQL table", e)
@@ -127,7 +132,6 @@ def populateAttendanceList(module_code):
         cursor = connection_populate.cursor()
         cursor.execute(sql_insert_Query, (db_name, None, None, None, module_code))
         connection_populate.commit()
-        print("[SQL] POPULATED {} ATTENDANCE LIST WITH STUDENTS".format(db_name))
 
     except Error as e:
         print("Error reading data from MySQL table", e)
@@ -155,7 +159,6 @@ def createAttendanceList(module_code, current_time_and_date):
 
         cursor = connection_create.cursor()
         cursor.execute(sql_create_Query, (module_code, db_name_2, db_name))
-        print("[SQL] CREATED {} ATTENDANCE LIST".format(db_name_2))
         populateNewAttendanceList()
         clearTempClassTable()
 
@@ -183,7 +186,7 @@ def populateNewAttendanceList():
         cursor = connection_populate.cursor()
         cursor.execute(sql_populate_Query, (module_code, db_name_2, db_name))
         connection_populate.commit()
-        print("[SQL] COPIED DATA {} ATTENDANCE LIST".format(db_name_2))
+        print("[SQL] COPIED DATA TO {}".format(db_name_2))
 
         # Once this has been populated it calls the exportAttendanceList function
         time.sleep(1)
@@ -200,7 +203,6 @@ def populateNewAttendanceList():
 # Function that continually checks the date/time matches a classDate from the current room
 def getClassDate(current_time_and_date, room_number):
     global TimeAndDate
-    timeAndDate = current_time_and_date
     time = 0
     try:
         connection = mysql.connector.connect(host='frame-db.cvn8zxkiw7bd.us-east-1.rds.amazonaws.com',
@@ -222,17 +224,12 @@ def getClassDate(current_time_and_date, room_number):
         global lecturerEmail
 
         for row in records:
-            print(row[1])
             module_code = row[1]
-            print(row[2])
             classDescription = row[2]
-            print(row[3])
             classDate = str(row[3])
             time = row[4]
             classLength = row[4]
-            print(row[5])
             classLecturer = row[5]
-            print(row[6])
             lecturerEmail = row[6]
 
         if time > 0:

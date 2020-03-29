@@ -75,8 +75,17 @@ def exportToPDF(export_list, export_module_code, export_filename):
 # Sends the email to the lecturer
 # @params pdf = the pdf that was generated
 def sendEmailToLecturer(pdf):
+    # Sets the filename to the pdf
+    # Sets the title of the document to the filename directory removing the folder names
+    filename = pdf
+    title = filename[10:]
+
     subject = str(sqlForGui.db_name_2)
-    body = "Automated email, send with attached attendance form - F.R.A.M.E"
+    body = "\n" \
+           + "Attendance form attached: {}".format(filename) \
+           + "\n" \
+           + "This is an automated email sent by F.R.A.M.E."
+
     sender_email = "frame.project600@gmail.com"
     receiver_email = str(sqlForGui.lecturerEmail)
 
@@ -89,11 +98,6 @@ def sendEmailToLecturer(pdf):
 
     # Add body to email
     message.attach(MIMEText(body, "plain"))
-
-    # Sets the filename to the pdf
-    # Sets the title of the document to the filename directory removing the folder names
-    filename = pdf
-    title = filename[10:]
 
     # Open PDF file in binary mode
     with open(filename, "rb") as attachment:
@@ -120,3 +124,5 @@ def sendEmailToLecturer(pdf):
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(sender_email, "F.R.A.M.E2020")
         server.sendmail(sender_email, receiver_email, text)
+
+    print("[INFO] SENT ATTENDANCE LIST TO {}".format(receiver_email))

@@ -36,24 +36,32 @@ finalRoomNumber = str(possibleRooms[0])
 converted_module_code = ''
 # Output path for photos taken, when pressing "Sign in" on GUI
 outputPath = "face_database/Photos_Taken/"
+outputPathDefault = "face_database/Photos_Taken/"
 
 
 # Adds Users to Attended List
 # If isLate is True add the attended to the late list also
 def addUserToAttendList(userid):
     attendees.append(userid)
-    print("[INFO] ADDED USER TO ATTENDANCE LIST")
+    print("[CLASS] ADDED {} TO ATTENDANCE LIST".format(userid))
     if systemtimer.isLate:
         late_attendees.append(userid)
-        print("[INFO] ADDED USER TO LATE-ATTENDANCE LIST")
+        print("[CLASS] ADDED {} TO LATE-ATTENDANCE LIST".format(userid))
 
+
+# TODO: Figure out why the photos_taken directory isn't changing when a new class is found.
+# TODO: Reset export list to remove values for the export PDF.
 
 # Prints a label containing the class details when is found.
 def updateGUIClassDetails():
     global converted_module_code
-    print("[GUI] CLASS DETAILS PRINTED TO WINDOW")
+    global outputPath
+    print("[CLASS] CLASS FOUND")
     converted_module_code = sqlForGui.module_code
-    updateFilePath()
+
+    outputPath = outputPathDefault
+    updateFilePath(converted_module_code, outputPath)
+
     classDetails = [str(sqlForGui.module_code), sqlForGui.classDate, sqlForGui.classDescription,
                     sqlForGui.classLecturer,
                     sqlForGui.classLength]
@@ -77,16 +85,17 @@ def updateGUIClassDetails():
 
 # Updates the filePath depending on what module_code the class is.
 # This is so not all faces are stored in one folder, it's separated between module_codes
-def updateFilePath():
+def updateFilePath(module_code, output):
     global outputPath
-    outputPath += converted_module_code
+    print("updated module code: {}".format(module_code))
+    outputPath = output + module_code
+    print("output path: {}".format(outputPath))
 
 
 # Updates GUI with a tick if user is found in the system
 # @param userid - The User's ID
 # @param timestamp - Filename of photo without the extension
 def updateGUIYes(userid, timestamp):
-    print("[SQL] UPDATED GUI WITH DETAILS")
     # Calls DB to pull the userID, First Name and Last Name
     sqlForGui.readUserData(userid)
 
@@ -121,8 +130,6 @@ def updateGUIYes(userid, timestamp):
 
 # Updates GUI with a cross if no face found
 def updateGUINo():
-    print("[INFO] UPDATED GUI WITH DETAILS")
-
     cross = tk.PhotoImage(file="images/cross.png")
     found = tk.Label(FrameGUI.root, compound=tk.CENTER, image=cross, bg='#05345C')
     found.image = cross
@@ -138,7 +145,7 @@ def updateGUINo():
 # Computes facial recognition
 # @param filename - photo take was taken
 def computeImage(filename):
-    print("[INFO] CROSS-REFERENCING IMAGE")
+    global converted_module_code
 
     # Directory of cross-referenced photos
     directory = "face_database/Recognized_Faces/" + converted_module_code
@@ -150,7 +157,7 @@ def computeImage(filename):
 
     try:
         my_face_encoding = face_recognition.face_encodings(picture_of_me)[0]
-        print("[INFO] CHECKING IF USER IS IN DATABASE")
+        print("[INFO] CHECKING IF FACE RECOGNIZED")
         try:
             # For every file in the directory check if the current photo matches any of their face encodings
             for i in file_names:
@@ -172,7 +179,6 @@ def computeImage(filename):
                             print("[INFO] USER FOUND | ID : {}".format(userID))
                             timestamp = (filename.rsplit(".", 1)[0])
                             updateGUIYes(userID, timestamp)
-
                             # Break out of For Each Loop
                             raise BreakIt
                         else:
@@ -183,7 +189,6 @@ def computeImage(filename):
     # If no face found in photo UpdateGUI with No
     except IndexError as e:
         updateGUINo()
-        print("[INFO] NO USERS FOUND")
 
 
 class FrameGUI:
@@ -311,16 +316,14 @@ class FrameGUI:
     # Function that gets the roomNumber inputted when pressing the "Select Room" buttons.
     def getRoomNumber(self):
         global finalRoomNumber
-        print("SUBMITTED VALUE {}".format(self.submittedValue))
         # Concatenates the user submitted value with "Room_". This is so it can be compares to the possibleRooms list.
         submittedValue_ = "Room_" + self.submittedValue
 
         # Loops through the possible rooms until it finds one that matches.
         # Sets the finalRoomNumber to the userSubmittedValue
         if submittedValue_ in possibleRooms:
-            print("Valid room given")
             finalRoomNumber = submittedValue_
-            print(finalRoomNumber)
+            print("[INFO] ROOM FOUND: {}".format(submittedValue_))
             self.resetSubmittedValue()
             self.removeSelectRoom()
         # If room not in the PossibleRooms, print a error message to the GUI and reset the submittedValue and roomText.
@@ -400,12 +403,10 @@ class FrameGUI:
                                       bg="white", foreground="black",
                                       command=self.removeSelectRoom)
         self.cancelButton.place(relx=0.6, rely=0.6, relwidth=0.2, relheight=0.35)
-        print("[GUI] SELECT_ROOM PRINTED TO WINDOW")
 
     # Function to remove the Select Room GUI when cancel button is pressed or, a correct room number was entered.
     # Also resets the submitted value and roomText label to empty.
     def removeSelectRoom(self):
-        print("[GUI] REMOVED SELECT ROOM")
         self.selectRoomLab.destroy()
         self.resetSubmittedValue()
         self.roomText.config(text='')
@@ -427,7 +428,6 @@ class FrameGUI:
     # Function that prints out a How-To-Use label.
     # Explains selecting a room, student mode, attendance states, and exporting to pdf.
     def howToUseLabel(self):
-        print("[GUI] HOW-TO-USE PRINTED TO WINDOW")
 
         text = "About\n" + "\n\n" + "Room:" + "\n" + "Select a room within the 'Help' menubar" + "\n\n" \
                + "Student Mode:" + "\n" + \
@@ -447,14 +447,12 @@ class FrameGUI:
 
     # Removes the How-To-Use label
     def removeHowToUse(self):
-        print("[GUI] REMOVED ABOUT ROOM")
         self.howToUseLab.destroy()
         self.howToUseButton.destroy()
 
     # Creates a credits label that disappears after 4 seconds.
     # Shows what our team members have worked on.
     def creditsLabel(self):
-        print("[GUI] CREDITS PRINTED TO WINDOW")
         text = "Credits" + "\n\n" + "Programming:" + "\n" + "James Clark" + "\n\n" + "Database Design:" + "\n" + \
                "James Clark, Sam Tredgett" + "\n\n" + "Documentation:" + "\n" + "Hugo A'Violet"
         creditsLab = tk.Label(FrameGUI.root, text=text, font=("Helvetica", 11), bg='#05345C', foreground="white",
@@ -481,7 +479,7 @@ class FrameGUI:
                     self.panel.image = image
 
         except RuntimeError as e:
-            print("[INFO] RUNTIME ERROR CATCH")
+            print("[ERROR] RUNTIME ERROR CATCH")
 
     # Takes Image Function
     # Stores timestamp and filename
@@ -522,7 +520,7 @@ class FrameGUI:
     # Closes application when X is clicked
     # Also called if 'yes' is selected from the closeQuestion function.
     def onClose(self):
-        print("[INFO] APPLICATION CLOSING")
+        print("[INFO] F.R.A.M.E CLOSING")
         self.stopEvent.set()
         self.vs.stop()
         self.root.quit()

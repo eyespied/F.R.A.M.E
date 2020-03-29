@@ -14,6 +14,15 @@ import threading
 ifClass = False
 
 
+# TODO: Populate Database ("The big Test"):
+#   Create 6 new modules (folders, database)
+#   Create 4 new lecturers
+#   Create 2 new temp emails
+#   Populate each room with a schedule
+#   Create 20 new students
+#   Populate modules with students (can repeat)
+#   Create 20 faces for these students (with corresponding id)
+
 # If class isn't in progress creates a thread and calls classCheck function
 def classCheck_():
     global ifClass
@@ -24,12 +33,11 @@ def classCheck_():
 # Start Web cam Video Stream
 # src=0 - USB Web cam
 # src=1 - Laptop In-built Web cam
-print("[INFO] APPLICATION STARTING")
+print("[INFO] F.R.A.M.E BOOTING")
 vs = VideoStream(src=0).start()
 
 time.sleep(1)
 app = FrameGUI(vs)
-print("[INFO] APPLICATION LOADED")
 
 if not ifClass:
     ifClass = True

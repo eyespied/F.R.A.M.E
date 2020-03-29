@@ -26,10 +26,10 @@ def systemTimer(system_timer):
         classCheckOver = False
         time.sleep(1)
         system_timer -= 1
-        print("CLASS OVER IN {}".format(system_timer))
+        print("[CLASS] CURRENT CLASS OVER IN {}".format(system_timer))
 
     timerOver = True
-    print("[SQL] UPDATING CLASS DATABASE")
+    print("[SQL] UPDATING CURRENT CLASS DATABASE")
 
     # Calls two functions to update SQL database
     for i in gui.attendees:
@@ -41,6 +41,25 @@ def systemTimer(system_timer):
     # frame.ifClass = False
     export_module_name = str(sqlForGui.module_code)
     sqlForGui.createAttendanceList(export_module_name, current_time_and_date)
+
+
+# Initializes isLate boolean.
+isLate = False
+
+
+# lateTimer that activates when late_timer reaches
+
+def lateTimer(late_timer):
+    global isLate
+    # Late timer variable (seconds) change this to change the timer.
+    while late_timer > 0:
+        time.sleep(1)
+        late_timer -= 1
+        print("[CLASS] LATE TIMER STARTS IN: {}".format(str(late_timer)))
+
+    isLate = True
+    if isLate:
+        print("[CLASS] USERS WILL NOW BE MARKED AS LATE")
 
 
 # Function that gets the current time and date.
@@ -76,7 +95,6 @@ def classCheck():
 
     classCheckOver = True
     if classCheckOver:
-        print("[SQL] CHECKING IF CLASS FOUND")
         getCurrentTimeAndDate()
         classCheck()
 
@@ -97,21 +115,3 @@ def startSystemTimer(class_length):
     # Joins both threads together, so nothing else runs until these are finished.
     system_thread.join()
     late_thread.join()
-
-
-# Initializes isLate boolean.
-isLate = False
-
-
-# lateTimer that activates when late_timer reaches
-def lateTimer(late_timer):
-    global isLate
-    # Late timer variable (seconds) change this to change the timer.
-    while late_timer > 0:
-        time.sleep(1)
-        late_timer -= 1
-        print("LATER TIMER IN: {}".format(str(late_timer)))
-
-    isLate = True
-    if isLate:
-        print("[INFO] USERS WILL NOW BE MARKED AS LATE")
