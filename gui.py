@@ -15,7 +15,7 @@ from PIL import Image, ImageTk
 import datetime
 import os
 import sqlForGui
-import time
+import systemtimer
 
 
 # Exception to Breakout of For Loop
@@ -34,26 +34,12 @@ converted_module_code = ''
 outputPath = "face_database/Photos_Taken/"
 
 
-# lateTimer that activates when late_timer reaches
-def lateTimer(late_timer):
-    global isLate
-    # Late timer variable (seconds) change this to change the timer.
-    while late_timer > 0:
-        isLate = False
-        time.sleep(1)
-        late_timer -= 1
-
-    isLate = True
-    if isLate:
-        print("[INFO] USERS WILL NOW BE MARKED AS LATE")
-
-
 # Adds Users to Attended List
 # If isLate is True add the attended to the late list also
 def addUserToAttendList(userid):
     attendees.append(userid)
     print("[INFO] ADDED USER TO ATTENDANCE LIST")
-    if isLate:
+    if systemtimer.isLate:
         late_attendees.append(userid)
         print("[INFO] ADDED USER TO LATE-ATTENDANCE LIST")
 
@@ -92,7 +78,7 @@ def updateGUIYes(userid, timestamp):
     # Calls DB to pull the userID, First Name and Last Name
     sqlForGui.readUserData(userid)
 
-    if not isLate:
+    if not systemtimer.isLate:
         tick = tk.PhotoImage(file="images/tick.png")
         found = tk.Label(FrameGUI.root, compound=tk.CENTER, image=tick, bg='#05345C')
         found.image = tick
@@ -100,7 +86,7 @@ def updateGUIYes(userid, timestamp):
         # Removes GUI tick after 3 seconds
         found.after(3000, lambda: found.place_forget())
 
-    if isLate:
+    if systemtimer.isLate:
         tick = tk.PhotoImage(file="images/late.png")
         found = tk.Label(FrameGUI.root, compound=tk.CENTER, image=tick, bg='#05345C')
         found.image = tick

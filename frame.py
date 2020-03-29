@@ -20,7 +20,8 @@ import threading
 ifClass = False
 
 
-def classCheck():
+def classCheck_():
+    global ifClass
     class_check = threading.Thread(target=systemtimer.classCheck)
     class_check.start()
 
@@ -31,12 +32,13 @@ def classCheck():
 print("[INFO] APPLICATION STARTING")
 vs = VideoStream(src=0).start()
 
-time.sleep(2.0)
+time.sleep(1)
 app = FrameGUI(vs)
 print("[INFO] APPLICATION LOADED")
 
 if not ifClass:
-    classCheck()
+    ifClass = True
+    classCheck_()
 
 # Launches GUI Application
 app.root.mainloop()

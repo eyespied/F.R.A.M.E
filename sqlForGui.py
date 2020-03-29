@@ -3,6 +3,7 @@ __copyright__ = "Copyright 2020, F.R.A.M.E Project"
 __credits__ = ["James Clark", "Hugo A'Violet", "Sam Tredgett"]
 __version__ = "1.0"
 
+import time
 from datetime import datetime
 
 import mysql.connector
@@ -168,6 +169,7 @@ def populateNewAttendanceList():
         connection_populate.commit()
         print("[SQL] COPIED DATA {} ATTENDANCE LIST".format(db_name_2))
 
+        time.sleep(1)
         exportAttendanceList()
 
     except Error as e:
@@ -216,8 +218,8 @@ def getClassDate(current_time_and_date, room_number):
             lecturerEmail = row[6]
 
         if time > 0:
-            populateAttendanceList(module_code)
             gui.updateGUIClassDetails()
+            populateAttendanceList(module_code)
             systemtimer.startSystemTimer(time)
 
     except Error as e:

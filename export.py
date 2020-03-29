@@ -1,3 +1,5 @@
+import time
+
 from reportlab.lib.units import inch
 
 import sqlForGui
@@ -59,6 +61,7 @@ def exportToPDF(export_list, export_module_code, export_filename):
 
     elems = [table]
     pdf.build(elems, onFirstPage=myFirstPage)
+    time.sleep(1)
     sendEmailToLecturer(filename)
 
 
