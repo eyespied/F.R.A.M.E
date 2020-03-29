@@ -14,15 +14,6 @@ import threading
 ifClass = False
 
 
-# TODO: Populate Database ("The big Test"):
-#   Create 6 new modules (folders, database)
-#   Create 4 new lecturers
-#   Create 2 new temp emails
-#   Populate each room with a schedule
-#   Create 20 new students
-#   Populate modules with students (can repeat)
-#   Create 20 faces for these students (with corresponding id)
-
 # If class isn't in progress creates a thread and calls classCheck function
 def classCheck_():
     global ifClass

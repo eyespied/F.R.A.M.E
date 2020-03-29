@@ -113,7 +113,7 @@ def updateGUIYes(userid, timestamp):
 
     # Prints out the User's Information
     userInformation = """{}\n{} {}""".format(sqlForGui.user, sqlForGui.fname, sqlForGui.lname)
-    user = tk.Label(FrameGUI.root, text=userInformation, font=30)
+    user = tk.Label(FrameGUI.root, text=userInformation, font=("Helvetica", 28), bg='#05345C', foreground="white")
     user.place(relx=0.249, rely=0.55, relwidth=0.5, relheight=0.2)
     # Removes User Information after 3 seconds
     user.after(3000, lambda: user.place_forget())

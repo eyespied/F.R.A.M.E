@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca512796-4963-4bc2-a80a-045b7bcba2cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/export.py" beforeDir="false" afterPath="$PROJECT_DIR$/export.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frame.py" beforeDir="false" afterPath="$PROJECT_DIR$/frame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +169,7 @@
       <workItem from="1585410190191" duration="14909000" />
       <workItem from="1585425444509" duration="2480000" />
       <workItem from="1585428278876" duration="7612000" />
-      <workItem from="1585477207824" duration="17894000" />
+      <workItem from="1585477207824" duration="20904000" />
     </task>
     <task id="LOCAL-00001" summary="Added output folders">
       <created>1584718249426</created>
@@ -234,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585496277724</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Updated Code:&#10;- Fixed email body to not contain folder path&#10;- Removed completed TODO lists">
+      <created>1585496386072</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1585496386072</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +256,8 @@
     <MESSAGE value="Updated Code:&#10;- Fixed threads so they not work in parallel, and the class database gets updated before class is finished. This is so the program has time to re-initialize class checking. (set to 15 seconds before at the momment) &#10;&#10;TBA:&#10;- Re-skin the module code pop up window.&#10;- Comment code&#10;- Remove redundant code&#10;- Start to populate DB" />
     <MESSAGE value="Updated Code:&#10;- Re-skinned the module code pop up window&#10;- Commented all the code&#10;&#10;TBA:&#10;- Start to populate DB" />
     <MESSAGE value="Updated Code:&#10;- Fixed a bug where the output path wasn't updating when a new class was found&#10;- Fixed a bug where the export list wasn't clearing before exporting, resulting in all users being added to it.&#10;&#10;TBA:&#10;- Start populating the database for &quot;the big test&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Code:&#10;- Fixed a bug where the output path wasn't updating when a new class was found&#10;- Fixed a bug where the export list wasn't clearing before exporting, resulting in all users being added to it.&#10;&#10;TBA:&#10;- Start populating the database for &quot;the big test&quot;" />
+    <MESSAGE value="Updated Code:&#10;- Fixed email body to not contain folder path&#10;- Removed completed TODO lists" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Code:&#10;- Fixed email body to not contain folder path&#10;- Removed completed TODO lists" />
   </component>
   <component name="WindowStateProjectService">
     <state x="309" y="129" key="#Notifications" timestamp="1584718930853">
@@ -268,34 +276,34 @@
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="130" y="185" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1600.870@0.0.1600.870" timestamp="1585224919355" />
-    <state x="234" y="0" key="CommitChangelistDialog2" timestamp="1585496277049">
+    <state x="192" y="0" key="CommitChangelistDialog2" timestamp="1585496385341">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="234" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1585496277049" />
+    <state x="192" y="0" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1585496385341" />
     <state x="187" y="190" key="FileChooserDialogImpl" timestamp="1585230795826">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="187" y="190" key="FileChooserDialogImpl/0.0.1600.870@0.0.1600.870" timestamp="1585230795826" />
-    <state width="754" height="227" key="GridCell.Tab.0.bottom" timestamp="1585496280233">
+    <state width="768" height="227" key="GridCell.Tab.0.bottom" timestamp="1585497486511">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="227" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1585496280233" />
-    <state width="754" height="227" key="GridCell.Tab.0.center" timestamp="1585496280233">
+    <state width="768" height="227" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1585497486511" />
+    <state width="768" height="227" key="GridCell.Tab.0.center" timestamp="1585497486511">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="227" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1585496280233" />
-    <state width="754" height="227" key="GridCell.Tab.0.left" timestamp="1585496280233">
+    <state width="768" height="227" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1585497486511" />
+    <state width="768" height="227" key="GridCell.Tab.0.left" timestamp="1585497486510">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="227" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1585496280233" />
-    <state width="754" height="227" key="GridCell.Tab.0.right" timestamp="1585496280233">
+    <state width="768" height="227" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1585497486510" />
+    <state width="768" height="227" key="GridCell.Tab.0.right" timestamp="1585497486511">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="227" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1585496280233" />
+    <state width="768" height="227" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1585497486511" />
     <state width="768" height="279" key="GridCell.Tab.1.bottom" timestamp="1585481793866">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
@@ -328,7 +336,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/F_R_A_M_E$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1585426077236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/F_R_A_M_E$frame.coverage" NAME="frame Coverage Results" MODIFIED="1585496021985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/F_R_A_M_E$frame.coverage" NAME="frame Coverage Results" MODIFIED="1585497486503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FRAME_FINAL$frame.coverage" NAME="frame Coverage Results" MODIFIED="1584714212282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
