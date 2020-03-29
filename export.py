@@ -82,7 +82,7 @@ def sendEmailToLecturer(pdf):
 
     subject = str(sqlForGui.db_name_2)
     body = "\n" \
-           + "Attendance form attached: {}".format(filename) \
+           + "Attendance form attached: {}".format(subject) \
            + "\n" \
            + "This is an automated email sent by F.R.A.M.E."
 

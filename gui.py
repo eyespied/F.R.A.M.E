@@ -48,10 +48,6 @@ def addUserToAttendList(userid):
         late_attendees.append(userid)
         print("[CLASS] ADDED {} TO LATE-ATTENDANCE LIST".format(userid))
 
-
-# TODO: Figure out why the photos_taken directory isn't changing when a new class is found.
-# TODO: Reset export list to remove values for the export PDF.
-
 # Prints a label containing the class details when is found.
 def updateGUIClassDetails():
     global converted_module_code
