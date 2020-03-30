@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca512796-4963-4bc2-a80a-045b7bcba2cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/FRAME_FINAL.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FRAME_FINAL.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frame.py" beforeDir="false" afterPath="$PROJECT_DIR$/frame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/cv2/cv2.cp36-win_amd64.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/cv2/cv2.cp36-win_amd64.pyd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +172,8 @@
       <workItem from="1585428278876" duration="7612000" />
       <workItem from="1585477207824" duration="24738000" />
       <workItem from="1585569298629" duration="3089000" />
-      <workItem from="1585572518562" duration="128000" />
+      <workItem from="1585572518562" duration="2776000" />
+      <workItem from="1585579360899" duration="2734000" />
     </task>
     <task id="LOCAL-00001" summary="Added output folders">
       <created>1584718249426</created>
@@ -268,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585571660130</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Updated Packages:&#10;- Fixed a bug that I didn't realise, I was using a different venv folder to the one in this directory. Therefore, project couldn't run if downloaded!">
+      <created>1585572725546</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1585572725546</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +292,8 @@
     <MESSAGE value="Populated database:&#10;http://cbcl.mit.edu/software-datasets/heisele/facerecognition-database.html&#10;&#10;Used MIT face recognition database to produce ten new students, populated the database with 5 modules, a room schedule and new lecturers. (For testing purposes only using one email to export)" />
     <MESSAGE value="Updated Code:&#10;- Fixed bug - Reset lateTimer, attendees list, late_attendees list when exporting current class." />
     <MESSAGE value="Updated Code:&#10;- Fixed bug where PDF headers were getting added incorrectly to the very first pdf export. This has been resolved by appending the headers to the list inside the exportToPDF function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Code:&#10;- Fixed bug where PDF headers were getting added incorrectly to the very first pdf export. This has been resolved by appending the headers to the list inside the exportToPDF function" />
+    <MESSAGE value="Updated Packages:&#10;- Fixed a bug that I didn't realise, I was using a different venv folder to the one in this directory. Therefore, project couldn't run if downloaded!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Packages:&#10;- Fixed a bug that I didn't realise, I was using a different venv folder to the one in this directory. Therefore, project couldn't run if downloaded!" />
   </component>
   <component name="WindowStateProjectService">
     <state x="309" y="129" key="#Notifications" timestamp="1584718930853">
@@ -306,34 +312,34 @@
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="130" y="185" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1600.870@0.0.1600.870" timestamp="1585224919355" />
-    <state x="0" y="23" key="CommitChangelistDialog2" timestamp="1585571659450">
+    <state x="0" y="23" key="CommitChangelistDialog2" timestamp="1585572713236">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="0" y="23" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1585571659450" />
+    <state x="0" y="23" key="CommitChangelistDialog2/0.0.1600.870@0.0.1600.870" timestamp="1585572713236" />
     <state x="553" y="116" key="FileChooserDialogImpl" timestamp="1585572548119">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="553" y="116" key="FileChooserDialogImpl/0.0.1600.870@0.0.1600.870" timestamp="1585572548119" />
-    <state width="754" height="229" key="GridCell.Tab.0.bottom" timestamp="1585572641697">
+    <state width="754" height="228" key="GridCell.Tab.0.bottom" timestamp="1585581847649">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="229" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1585572641697" />
-    <state width="754" height="229" key="GridCell.Tab.0.center" timestamp="1585572641696">
+    <state width="754" height="228" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1585581847649" />
+    <state width="754" height="228" key="GridCell.Tab.0.center" timestamp="1585581847649">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="229" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1585572641696" />
-    <state width="754" height="229" key="GridCell.Tab.0.left" timestamp="1585572641696">
+    <state width="754" height="228" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1585581847649" />
+    <state width="754" height="228" key="GridCell.Tab.0.left" timestamp="1585581847649">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="229" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1585572641696" />
-    <state width="754" height="229" key="GridCell.Tab.0.right" timestamp="1585572641696">
+    <state width="754" height="228" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1585581847649" />
+    <state width="754" height="228" key="GridCell.Tab.0.right" timestamp="1585581847649">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1323" height="177" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584568944687" />
-    <state width="754" height="229" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1585572641696" />
+    <state width="754" height="228" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1585581847649" />
     <state width="768" height="279" key="GridCell.Tab.1.bottom" timestamp="1585481793866">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
@@ -350,15 +356,15 @@
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="768" height="279" key="GridCell.Tab.1.right/0.0.1600.870@0.0.1600.870" timestamp="1585481793866" />
-    <state x="272" y="48" width="998" height="720" key="SettingsEditor" timestamp="1585572638451">
+    <state x="206" y="52" width="998" height="720" key="SettingsEditor" timestamp="1585582163185">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="50" y="13" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584556788406" />
-    <state x="272" y="48" width="998" height="720" key="SettingsEditor/0.0.1600.870@0.0.1600.870" timestamp="1585572638451" />
-    <state x="196" y="169" key="Vcs.Push.Dialog.v2" timestamp="1585571667916">
+    <state x="206" y="52" width="998" height="720" key="SettingsEditor/0.0.1600.870@0.0.1600.870" timestamp="1585582163185" />
+    <state x="196" y="169" key="Vcs.Push.Dialog.v2" timestamp="1585572743056">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="196" y="169" key="Vcs.Push.Dialog.v2/0.0.1600.870@0.0.1600.870" timestamp="1585571667916" />
+    <state x="196" y="169" key="Vcs.Push.Dialog.v2/0.0.1600.870@0.0.1600.870" timestamp="1585572743056" />
     <state x="667" y="268" key="com.intellij.ide.util.TipDialog" timestamp="1584571593454">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
@@ -366,7 +372,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/F_R_A_M_E$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1585426077236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/F_R_A_M_E$frame.coverage" NAME="frame Coverage Results" MODIFIED="1585572641683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/F_R_A_M_E$frame.coverage" NAME="frame Coverage Results" MODIFIED="1585581583256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FRAME_FINAL$frame.coverage" NAME="frame Coverage Results" MODIFIED="1584714212282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
