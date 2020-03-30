@@ -11,7 +11,6 @@ import time
 import threading
 
 # TODO:
-#   1. Export out of OneDrive and get working.
 #   2. Run another "day test" to populate the module codes with some data, and to get PDFs.
 #   3. Look into matpotlib analytics.
 
