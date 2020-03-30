@@ -23,7 +23,6 @@ db_name_2 = ''
 # Initializes the module code
 module_code = ''
 # Export list titles for the pdf
-export_list_default = [['User ID', 'First Name', 'Last Name', 'Attended', 'Late', 'Timestamp']]
 export_list = [[]]
 # Initializes the class variables
 classDescription = ''
@@ -32,10 +31,9 @@ classLength = ''
 classLecturer = ''
 lecturerEmail = ''
 
-
 # Function that takes all of the data from the current Room Class
 def exportAttendanceList():
-    global db_name_2, default_values
+    global db_name_2, default_values, export_list
     # Replaces the db_name_2 to not include colons, this is so it can export to the output folder
     replace = db_name_2.replace(':', '-')
     # Stores the new variable in export_file_name
@@ -55,7 +53,7 @@ def exportAttendanceList():
         records = cursor.fetchall()
 
         # Adds the default headers to the export list
-        export_list.extend(export_list_default)
+        export_list = [['User ID', 'First Name', 'Last Name', 'Attended', 'Late', 'Timestamp']]
 
         for row in records:
             classid = (row[0])

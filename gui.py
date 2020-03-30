@@ -82,9 +82,7 @@ def updateGUIClassDetails():
 # This is so not all faces are stored in one folder, it's separated between module_codes
 def updateFilePath(module_code, output):
     global outputPath
-    print("updated module code: {}".format(module_code))
     outputPath = output + module_code
-    print("output path: {}".format(outputPath))
 
 
 # Updates GUI with a tick if user is found in the system
@@ -499,7 +497,7 @@ class FrameGUI:
     def adminMode(self, event):
         self.root.config(menu=self.menubar)
         self.root.overrideredirect(False)
-        print("[GUI] ADMIN MODE ENABLED")
+        print("[GUI] STAFF MODE ENABLED")
 
     # Function that is called when quit in the menubar is pressed.
     # Prompts the user to make sure they want to quit.
