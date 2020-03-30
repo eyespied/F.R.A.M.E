@@ -22,7 +22,6 @@ import systemtimer
 class BreakIt(Exception):
     pass
 
-
 # Stores attended UserID's in a list
 attendees = []
 # Stores late attended UserID's in a list

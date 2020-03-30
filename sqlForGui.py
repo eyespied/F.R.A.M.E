@@ -73,8 +73,11 @@ def exportAttendanceList():
         # @params - export list, the module code and the filename
         export.exportToPDF(export_list, export_module_name, export_file_name)
 
-        # Reset export list
+        # Reset for next class, export list, attendees lists and isLate timer set to False.
         export_list.clear()
+        gui.attendees.clear()
+        gui.late_attendees.clear()
+        systemtimer.isLate = False
 
 
     except Error as e:
