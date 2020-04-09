@@ -1,6 +1,6 @@
 # F.R.A.M.E - Facial Recognition Attendance Monitoring Engine
 ## Project Description
-F.R.A.M.E is a fully functional attendance monitoring system designed to be used within educational institutions to mark students as attended. The system uses facial recognition to mark the student as attendance or late. The system uses a GUI and has been designed to be used on touch-screen monitors. To know more about the system please watch the project video demo by clicking on the thumbnail:
+F.R.A.M.E is a fully functional attendance monitoring system designed to be used within educational institutions to mark students as attended. The system uses facial recognition to mark the student as attendance or late. The system uses a GUI and has been designed to be used on touch-screen monitors. To know more about the system please watch the project video demo by clicking on the thumbnail, or head over to the documentation folder:
 
 [![Video thumbnail](https://img.youtube.com/vi/RBPeUJZwJ54/0.jpg)](https://youtu.be/RBPeUJZwJ54)
 
