@@ -13,6 +13,6 @@ F.R.A.M.E is a fully functional attendance monitoring system designed to be used
 * [matplotlib](https://matplotlib.org/)
 
 ## Credits
-* James Clark (Programming and Database Design)
-* Sam Tredgett (Technical Analysis and Database Design)
+* James Clark (Programming, Database Design and Documentation)
+* Sam Tredgett (Documentation and Database Design)
 * Hugo A'Violet (Documentation)
